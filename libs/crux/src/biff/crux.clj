@@ -100,7 +100,9 @@
                  :crux/tx-log {:crux/module 'crux.jdbc/->tx-log
                                :connection-pool :crux.jdbc/connection-pool}
                  :crux/document-store {:crux/module 'crux.jdbc/->document-store
-                                       :connection-pool :crux.jdbc/connection-pool}})
+                                       :connection-pool :crux.jdbc/connection-pool}}
+                ;; Default to an empty topology which creates an in-memory DB.
+                {})
               opts))
       crux/sync)))
 
