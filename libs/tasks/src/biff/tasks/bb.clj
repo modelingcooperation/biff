@@ -97,7 +97,7 @@
   (libs:sync* {}))
 
 (def ^:private source-uri
-  "https://github.com/jacobobryant/biff/blob/{git-commit}/{filepath}#L{line}")
+  "https://github.com/modelingcooperation/biff/blob/{git-commit}/{filepath}#L{line}")
 
 (defn build-codox []
   (let [{:keys [libs]} (edn/read-string (slurp "libs.edn"))

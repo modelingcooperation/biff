@@ -1,4 +1,4 @@
-{:git-url "https://github.com/jacobobryant/biff"
+{:git-url "https://github.com/modelingcooperation/biff"
  :group-id biff
  :libs {util       {:deps [org.clojure/tools.namespace
                            org.slf4j/slf4j-nop]}

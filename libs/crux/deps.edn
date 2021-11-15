@@ -5,6 +5,6 @@
   pro.juxt.crux/crux-rocksdb {:mvn/version "1.17.1"},
   metosin/malli {:mvn/version "0.5.1"},
   biff/util
-  {:git/url "https://github.com/jacobobryant/biff",
+  {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/util",
    :sha "30cac4e57e0bee66dcfdf83b8e91ed1cfd7d2018"}}}

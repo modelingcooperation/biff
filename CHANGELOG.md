@@ -1,3 +1,3 @@
 # Changelog
 
-See [Github releases](https://github.com/jacobobryant/biff/releases).
+See [Github releases](https://github.com/modelingcooperation/biff/releases).
