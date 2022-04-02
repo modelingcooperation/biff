@@ -7,7 +7,7 @@
   biff/util
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/util",
-   :sha "f7ae7b06278ca62a57bf828c7554a66add50b6fa"},
+   :sha "8894dd093c5f4f3b21c030ee8960ccb75e05f4cd"},
   nrepl/nrepl {:mvn/version "0.8.3"},
   info.sunng/ring-jetty9-adapter {:mvn/version "0.14.3"},
   buddy/buddy-sign {:mvn/version "3.4.1"},

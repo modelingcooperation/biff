@@ -2,32 +2,32 @@
  {biff/main
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/main",
-   :sha "f7ae7b06278ca62a57bf828c7554a66add50b6fa"},
+   :sha "8894dd093c5f4f3b21c030ee8960ccb75e05f4cd"},
   biff/dev
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/dev",
-   :sha "f7ae7b06278ca62a57bf828c7554a66add50b6fa"},
+   :sha "8894dd093c5f4f3b21c030ee8960ccb75e05f4cd"},
   biff/rum
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/rum",
-   :sha "f7ae7b06278ca62a57bf828c7554a66add50b6fa"},
+   :sha "8894dd093c5f4f3b21c030ee8960ccb75e05f4cd"},
   biff/crux
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/crux",
-   :sha "f7ae7b06278ca62a57bf828c7554a66add50b6fa"},
+   :sha "8894dd093c5f4f3b21c030ee8960ccb75e05f4cd"},
   biff/util
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/util",
-   :sha "f7ae7b06278ca62a57bf828c7554a66add50b6fa"},
+   :sha "8894dd093c5f4f3b21c030ee8960ccb75e05f4cd"},
   biff/client
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/client",
-   :sha "f7ae7b06278ca62a57bf828c7554a66add50b6fa"},
+   :sha "8894dd093c5f4f3b21c030ee8960ccb75e05f4cd"},
   biff/middleware
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/middleware",
-   :sha "f7ae7b06278ca62a57bf828c7554a66add50b6fa"},
+   :sha "8894dd093c5f4f3b21c030ee8960ccb75e05f4cd"},
   biff/misc
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/misc",
-   :sha "f7ae7b06278ca62a57bf828c7554a66add50b6fa"}}}
+   :sha "8894dd093c5f4f3b21c030ee8960ccb75e05f4cd"}}}
