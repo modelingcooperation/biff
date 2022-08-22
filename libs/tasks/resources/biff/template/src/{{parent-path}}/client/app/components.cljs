@@ -70,7 +70,7 @@
     (.toLocaleTimeString (react db/message-cutoff)) ":"]
    [:.h-3]
    (for [{:msg/keys [text sent-at user]
-          doc-id :crux.db/id} (react db/messages)]
+          doc-id :xt/id} (react db/messages)]
      [:.mb-3 {:key (str doc-id)}
       [:.flex.align-baseline.text-sm
        [:.text-gray-600 (.toLocaleTimeString sent-at)]

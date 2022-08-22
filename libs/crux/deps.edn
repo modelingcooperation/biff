@@ -1,8 +1,8 @@
 {:paths ["src"],
  :deps
- {pro.juxt.crux/crux-core {:mvn/version "1.17.1"},
-  pro.juxt.crux/crux-jdbc {:mvn/version "1.17.1"},
-  pro.juxt.crux/crux-rocksdb {:mvn/version "1.17.1"},
+ {com.xtdb/xtdb-core {:mvn/version "1.22.0"}
+  com.xtdb/xtdb-jdbc {:mvn/version "1.22.0"}
+  com.xtdb/xtdb-rocksdb {:mvn/version "1.22.0"}
   metosin/malli {:mvn/version "0.5.1"},
   biff/util
   {:git/url "https://github.com/modelingcooperation/biff",

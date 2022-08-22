@@ -10,7 +10,7 @@
    :user/foo    :string
    :user/bar    :string
    :user        [:map {:closed true}
-                 [:crux.db/id :user/id]
+                 [:xt/id :user/id]
                  :user/email
                  [:user/foo {:optional true}]
                  [:user/bar {:optional true}]]
@@ -19,7 +19,7 @@
    :msg/text    :string
    :msg/sent-at inst?
    :msg         [:map {:closed true}
-                 [:crux.db/id :msg/id]
+                 [:xt/id :msg/id]
                  :msg/user
                  :msg/text
                  :msg/sent-at]})
@@ -41,10 +41,10 @@
   true)
 
 (defmethod authorize [:user :get]
-  [{:keys [biff/uid]} {:keys [crux.db/id]}]
+  [{:keys [biff/uid]} {:keys [xt/id]}]
   (= uid id))
 
 (defmethod authorize [:user :update]
-  [{:keys [biff/uid]} before {:keys [crux.db/id] :as after}]
+  [{:keys [biff/uid]} before {:keys [xt/id] :as after}]
   (and (= uid id)
        (apply = (map #(dissoc % :user/foo) [before after]))))

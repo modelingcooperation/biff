@@ -33,7 +33,7 @@
     [:bar :create] true
     false))
 
-(def doc {:crux.db/id :foo})
+(def doc {:xt/id :foo})
 
 (deftest check-read
   (is (some? (bc/check-read {} {:docs [doc]})))
@@ -57,7 +57,7 @@
                             :doc-type :bar}]})))))
 
 (deftest normalize-tx-doc
-  (is (= {:crux.db/id {:foo "bar"}
+  (is (= {:xt/id {:foo "bar"}
           :foo "bar"
           :yeeted-at #inst "1970"
           :numbers #{1 2 3}
@@ -87,26 +87,26 @@
                    :doc-id :c
                    :doc-type :foo
                    :before nil
-                   :after {:crux.db/id :c
+                   :after {:xt/id :c
                            :hello "there"}}
                   {:tx-item [[:foo] {:hello "there"
                                      :db/merge true}]
                    :doc-id :y
                    :doc-type :foo
-                   :before {:crux.db/id :y
+                   :before {:xt/id :y
                             :a "b"}
-                   :after {:crux.db/id :y
+                   :after {:xt/id :y
                            :hello "there"
                            :a "b"}}
                   {:tx-item [[:foo :a] nil]
                    :doc-id :a
                    :doc-type :foo
-                   :before {:crux.db/id :a
+                   :before {:xt/id :a
                             :a "b"}
                    :after nil}]]
     (with-open [node (start-node
-                       [{:crux.db/id :y :a "b"}
-                        {:crux.db/id :a :a "b"}])]
+                       [{:xt/id :y :a "b"}
+                        {:xt/id :a :a "b"}])]
       (is (= expected
              (bc/get-changes
                {:db (crux/db node)
@@ -119,7 +119,7 @@
    :user/foo    :string
    :user/bar    :string
    :user        [:map {:closed true}
-                 [:crux.db/id :user/id]
+                 [:xt/id :user/id]
                  :user/email
                  [:user/foo {:optional true}]
                  [:user/bar {:optional true}]]
@@ -128,7 +128,7 @@
    :msg/text    :string
    :msg/sent-at inst?
    :msg         [:map {:closed true}
-                 [:crux.db/id :msg/id]
+                 [:xt/id :msg/id]
                  :msg/user
                  :msg/text
                  :msg/sent-at]})
@@ -173,19 +173,19 @@
                          :doc-type :user,
                          :before nil,
                          :after {:user/email "username@example.com",
-                          :crux.db/id uid}}],
+                          :xt/id uid}}],
               :crux-tx [[:crux.tx/match uid nil]
                         [:crux.tx/put {:user/email "username@example.com",
-                                       :crux.db/id uid}]]})))))
+                                       :xt/id uid}]]})))))
 
 (deftest subscription+updates
-  (with-open [node (start-node [{:crux.db/id :foo
+  (with-open [node (start-node [{:xt/id :foo
                                  :a 1}])]
     (is (= (#'bc/subscription+updates
              {:txes [{:crux.tx.event/tx-events [[nil :foo]]}]
               :db-before (crux/db node)
               :db-after (crux/with-tx (crux/db node)
-                          [[:crux.tx/put {:crux.db/id :foo
+                          [[:crux.tx/put {:xt/id :foo
                                           :a 2}]])
               :subscriptions #{{:query {:id :foo
                                         :doc-type :x}}
@@ -198,7 +198,7 @@
                                         :doc-type :x}}}})
            '([{:query {:id :foo,
                        :doc-type :x}}
-              {[:x :foo] {:crux.db/id :foo,
+              {[:x :foo] {:xt/id :foo,
                           :a 2}}]
              [{:query {:where [[:a 1]],
                        :doc-type :x}}
@@ -206,26 +206,26 @@
              [{:query {:where [[:a a]
                                [(<= a 2)]],
                        :doc-type :x}}
-              {[:x :foo] {:crux.db/id :foo,
+              {[:x :foo] {:xt/id :foo,
                           :a 2}}])))))
 
 (deftest biff-q
-  (with-open [node (start-node [{:crux.db/id :foo
+  (with-open [node (start-node [{:xt/id :foo
                                  :a 1}])]
     (with-redefs [bc/check-read (constantly nil)]
       (is (= (bc/biff-q {:biff.crux/db (delay (crux/db node))}
                         {:doc-type :x
                          :id :foo})
-             {[:x :foo] {:crux.db/id :foo, :a 1}}))
+             {[:x :foo] {:xt/id :foo, :a 1}}))
       (is (= (bc/biff-q {:biff.crux/db (delay (crux/db node))}
                         {:doc-type :x
                          :where [[:a]]})
-             {[:x :foo] {:crux.db/id :foo, :a 1}}))
+             {[:x :foo] {:xt/id :foo, :a 1}}))
       (is (= (bc/biff-q {:biff.crux/db (delay (crux/db node))}
                         {:doc-type :x
                          :where '[[:a a]
                                   [(== a 1)]]})
-             {[:x :foo] {:crux.db/id :foo, :a 1}}))
+             {[:x :foo] {:xt/id :foo, :a 1}}))
       (is (= (bc/biff-q {:biff.crux/db (delay (crux/db node))}
                         {:doc-type :x
                          :where [[:b]]})

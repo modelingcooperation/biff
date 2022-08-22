@@ -282,7 +282,7 @@ need to specify relevant "doc types." These can be defined with either Spec or M
    :user/foo    :string
    :user/bar    :string
    :user        [:map {:closed true}
-                 [:crux.db/id :user/id]
+                 [:xt/id :user/id]
                  :user/email
                  [:user/foo {:optional true}]
                  [:user/bar {:optional true}]]
@@ -291,7 +291,7 @@ need to specify relevant "doc types." These can be defined with either Spec or M
    :msg/text    :string
    :msg/sent-at inst?
    :msg         [:map {:closed true}
-                 [:crux.db/id :msg/id]
+                 [:xt/id :msg/id]
                  :msg/user
                  :msg/text
                  :msg/sent-at]})
@@ -315,7 +315,7 @@ by extending a multimethod:
 
 ```clojure
 (defmethod biff.crux/authorize [:user :get]
-  [{:keys [biff/uid]} {:keys [crux.db/id]}]
+  [{:keys [biff/uid]} {:keys [xt/id]}]
   (= uid id))
 ```
 
@@ -373,7 +373,7 @@ be normalized to the following Crux transaction:
 
 ```clojure
 [[:crux.tx/match #uuid "some-uuid" nil]
- [:crux.tx/put {:crux.db/id #uuid "some-uuid"
+ [:crux.tx/put {:xt/id #uuid "some-uuid"
                 :user/email "username@example.com"}]]
 ```
 
@@ -476,7 +476,7 @@ keys in your queries.
  {:rating/value :like}}
 
 => [:crux.tx/put
-    {:crux.db/id {:rating/user #uuid "some-user-id"
+    {:xt/id {:rating/user #uuid "some-user-id"
                   :rating/item #uuid "some-item-id"}
      :rating/user #uuid "some-user-id"
      :rating/item #uuid "some-item-id"
@@ -577,7 +577,7 @@ to manage subscriptions on the front end. For example:
      :where '[[:user/name name]
               [:user/age age]
               [(<= 18 age)]]}
-    {:user {#uuid "some-uuid" {:crux.db/id #uuid "some-uuid"
+    {:user {#uuid "some-uuid" {:xt/id #uuid "some-uuid"
                                :user/name "Hoid"
                                :user/age 43}}}}
 ```

@@ -13,7 +13,7 @@
     [clojure.stacktrace :as st]
     [clojure.walk :as walk]
     [clojure.spec.alpha :as s]
-    [crux.api :as crux]
+    [xtdb.api :as crux]
     [malli.core :as malc]))
 
 ; This is just for reference.
@@ -33,7 +33,7 @@
    :updates              [:map-of :ident :doc]
    :ident                [:tuple :doc-type :doc-id]
    :doc                  [:map
-                          :crux.db/id]
+                          :xt/id]
    :change               [:map
                           :tx-item
                           :doc-id
@@ -75,35 +75,35 @@
   dir        - A path to store RocksDB instances in.
   jdbc-spec,
   pool-opts  - Maps to pass as
-               {:crux.jdbc/connection-pool
+               {:xtdb.jdbc/connection-pool
                 {:db-spec jdbc-spec :pool-opts pool-opts ...}}.
                (Used only when topology is :jdbc).
-  opts       - Additional options to pass to crux.api/start-node."
+  opts       - Additional options to pass to xtdb.api/start-node."
   [{:keys [topology dir opts jdbc-spec pool-opts]}]
   (let [rocksdb (fn [basename]
-                  {:kv-store {:crux/module 'crux.rocksdb/->kv-store
+                  {:kv-store {:xtdb/module 'xtdb.rocksdb/->kv-store
                               :db-dir (io/file dir basename)}})]
     (doto (crux/start-node
-            (merge
-              (case topology
-                :standalone
-                {:crux/index-store    (rocksdb "index")
-                 :crux/document-store (rocksdb "docs")
-                 :crux/tx-log         (rocksdb "tx-log")}
+           (merge
+            (case topology
+              :standalone
+              {:xtdb/index-store    (rocksdb "index")
+               :xtdb/document-store (rocksdb "docs")
+               :xtdb/tx-log         (rocksdb "tx-log")}
 
-                :jdbc
-                {:crux/index-store (rocksdb "index")
-                 :crux.jdbc/connection-pool {:dialect {:crux/module
-                                                       'crux.jdbc.psql/->dialect}
-                                             :pool-opts pool-opts
-                                             :db-spec jdbc-spec}
-                 :crux/tx-log {:crux/module 'crux.jdbc/->tx-log
-                               :connection-pool :crux.jdbc/connection-pool}
-                 :crux/document-store {:crux/module 'crux.jdbc/->document-store
-                                       :connection-pool :crux.jdbc/connection-pool}}
-                ;; Default to an empty topology which creates an in-memory DB.
-                {})
-              opts))
+              :jdbc
+              {:xtdb/index-store (rocksdb "index")
+               :xtdb.jdbc/connection-pool {:dialect {:xtdb/module
+                                                     'xtdb.jdbc.psql/->dialect}
+                                           :pool-opts pool-opts
+                                           :db-spec jdbc-spec}
+               :xtdb/tx-log {:xtdb/module 'xtdb.jdbc/->tx-log
+                             :connection-pool :xtdb.jdbc/connection-pool}
+               :xtdb/document-store {:xtdb/module 'xtdb.jdbc/->document-store
+                                     :connection-pool :xtdb.jdbc/connection-pool}}
+              ;; Default to an empty topology which creates an in-memory DB.
+              {})
+            opts))
       crux/sync)))
 
 (defn use-crux
@@ -149,7 +149,7 @@
   Example:
 
   (q-entity db [[:user/email \"foo@example.com\"]])
-  => {:crux.db/id #uuid \"some-uuid\"
+  => {:xt/id #uuid \"some-uuid\"
       :user/email \"foo@example.com\"}"
   [db kvs]
   (ffirst
@@ -187,7 +187,7 @@
                                :operation op
                                :db db
                                :doc doc
-                               :doc-id (:crux.db/id doc))
+                               :doc-id (:xt/id doc))
                         doc))
                     [(if (some? (:id query)) :get :query)
                      :read
@@ -247,7 +247,7 @@
               (map? doc-id) (merge doc-id)
               (some tx-doc [:db/merge :db/update]) (->> (merge before)))
         doc (-> doc
-                (assoc :crux.db/id doc-id)
+                (assoc :xt/id doc-id)
                 (dissoc :db/merge :db/update))
         doc (->> doc
                  (walk/postwalk (fn [x]
@@ -345,12 +345,12 @@
                                                 (java.util.UUID/randomUUID)))})
         crux-tx (into
                   (mapv (fn [{:keys [doc-id before]}]
-                          [:crux.tx/match doc-id before])
+                          [:xtdb.api/match doc-id before])
                         changes)
                   (mapv (fn [{:keys [after doc-id]}]
                           (if after
-                            [:crux.tx/put after]
-                            [:crux.tx/delete doc-id]))
+                            [:xtdb.api/put after]
+                            [:xtdb.api/delete doc-id]))
                         changes))]
     (doseq [{:keys [before doc-type]
              [_ tx-doc :as tx-item] :tx-item
@@ -413,10 +413,10 @@
 (defn- query-contains? [{:keys [doc empty-db]
                          {:keys [id where]} :query}]
   (if (some? id)
-    (= id (:crux.db/id doc))
+    (= id (:xt/id doc))
     (not
       (empty?
-        (crux/q (crux/with-tx empty-db [[:crux.tx/put doc]])
+        (crux/q (crux/with-tx empty-db [[:xtdb.api/put doc]])
                 {:find '[doc]
                  :where (mapv #(cond->> %
                                  (attr-clause? %) (into ['doc]))
@@ -426,7 +426,8 @@
   [{:keys [txes db-before db-after subscriptions]}]
   (let [norm-queries (distinct (map (comp normalize-query :query) subscriptions))
         id->before+after
-        (->> (for [{:crux.tx.event/keys [tx-events]} txes
+        ;; TODO
+        (->> (for [{:xtdb.api/keys [tx-events]} txes
                    [_ doc-id] tx-events]
                doc-id)
              distinct
@@ -434,7 +435,7 @@
                      (let [[before after] (mapv #(crux/entity % doc-id)
                                                 [db-before db-after])]
                        (when (not= before after)
-                         [(some :crux.db/id [before after])
+                         [(some :xt/id [before after])
                           [before after]]))))
              (into {}))
 
@@ -474,7 +475,7 @@
                                    biff.crux/subscriptions] :as sys}]
   (with-open [log (crux/open-tx-log node
                                     (some-> @latest-tx
-                                            :crux.tx/tx-id
+                                            :xtdb.api/tx-id
                                             long)
                                     false)]
     (when-some [txes (->> log
@@ -540,7 +541,7 @@
                                                (disconnected client-id)))
                                      subscriptions)))))))
         latest-tx (atom (or (crux/latest-completed-tx node)
-                            {:crux.tx/tx-id -1}))
+                            {:xtdb.api/tx-id -1}))
         sys (-> sys
                 (assoc :biff.crux/subscriptions subscriptions
                        :biff.crux/latest-tx latest-tx)
@@ -548,7 +549,7 @@
         lock (Object.)
         listener (crux/listen
                    node
-                   {:crux/event-type :crux/indexed-tx}
+                   {:xtdb.api/event-type :xtdb.api/indexed-tx}
                    (fn [_]
                      (locking lock
                        (try
@@ -597,7 +598,7 @@
                  {:query query :doc bad-doc})))
     (into {}
           (map (fn [doc]
-                 [[doc-type (:crux.db/id doc)] doc]))
+                 [[doc-type (:xt/id doc)] doc]))
           docs)))
 
 (defn handle-subscribe-event!
