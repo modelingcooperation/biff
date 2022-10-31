@@ -1,0 +1,1073 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Biff</title>
+    <meta name="og:title" content="Biff">
+    <meta name="description"    content="Batteries-included web framework for Clojure.">
+    <meta name="og:description" content="Batteries-included web framework for Clojure.">
+    <meta name="twitter:card" content="summary">
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen-ed1b206f.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-c427a123.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-c5541673.js"></script>
+    <script src="https://sa.findka.com/latest.js" defer="defer" async="async"></script>
+    <noscript><img alt="" src="https://sa.findka.com/noscript.gif"/></noscript>
+  </head>
+
+  <body class="index" data-languages="[&quot;Clojure&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <a href="https://findka.com" style="text-decoration:none;">
+      <div style="height:15px"></div>
+        <img src="images/logo-82f01d09.png" class="logo" alt="Logo" /></a>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#status" class="toc-h2 toc-link" data-title="Status">Status</a>
+                  </li>
+                  <li>
+                    <a href="#additional-resources" class="toc-h2 toc-link" data-title="Additional resources">Additional resources</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#getting-started" class="toc-h1 toc-link" data-title="Getting started">Getting started</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#development" class="toc-h2 toc-link" data-title="Development">Development</a>
+                  </li>
+                  <li>
+                    <a href="#building" class="toc-h2 toc-link" data-title="Building">Building</a>
+                  </li>
+                  <li>
+                    <a href="#server-setup" class="toc-h2 toc-link" data-title="Server setup">Server setup</a>
+                  </li>
+                  <li>
+                    <a href="#deployment" class="toc-h2 toc-link" data-title="Deployment">Deployment</a>
+                  </li>
+                  <li>
+                    <a href="#monitoring" class="toc-h2 toc-link" data-title="Monitoring">Monitoring</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#using-this-documentation" class="toc-h1 toc-link" data-title="Using this documentation">Using this documentation</a>
+          </li>
+          <li>
+            <a href="#design-philosophy" class="toc-h1 toc-link" data-title="Design Philosophy">Design Philosophy</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#code-organization" class="toc-h2 toc-link" data-title="Code organization">Code organization</a>
+                  </li>
+                  <li>
+                    <a href="#system-composition" class="toc-h2 toc-link" data-title="System composition">System composition</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#authorization-rules" class="toc-h1 toc-link" data-title="Authorization rules">Authorization rules</a>
+          </li>
+          <li>
+            <a href="#transactions" class="toc-h1 toc-link" data-title="Transactions">Transactions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#tx-docs" class="toc-h2 toc-link" data-title="TX docs">TX docs</a>
+                  </li>
+                  <li>
+                    <a href="#receiving-transactions" class="toc-h2 toc-link" data-title="Receiving transactions">Receiving transactions</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#subscriptions" class="toc-h1 toc-link" data-title="Subscriptions">Subscriptions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#subscription-query-format" class="toc-h2 toc-link" data-title="Subscription query format">Subscription query format</a>
+                  </li>
+                  <li>
+                    <a href="#subscription-interface" class="toc-h2 toc-link" data-title="Subscription interface">Subscription interface</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#system-map" class="toc-h1 toc-link" data-title="System map">System map</a>
+          </li>
+          <li>
+            <a href="#recipes" class="toc-h1 toc-link" data-title="Recipes">Recipes</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#scheduled-tasks" class="toc-h2 toc-link" data-title="Scheduled tasks">Scheduled tasks</a>
+                  </li>
+                  <li>
+                    <a href="#babashka-tasks" class="toc-h2 toc-link" data-title="Babashka tasks">Babashka tasks</a>
+                  </li>
+                  <li>
+                    <a href="#server-side-rendering" class="toc-h2 toc-link" data-title="Server-side rendering">Server-side rendering</a>
+                  </li>
+                  <li>
+                    <a href="#replacing-rum" class="toc-h2 toc-link" data-title="Replacing Rum">Replacing Rum</a>
+                  </li>
+                  <li>
+                    <a href="#other-deployment-options" class="toc-h2 toc-link" data-title="Other deployment options">Other deployment options</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#contributing" class="toc-h1 toc-link" data-title="Contributing">Contributing</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#documentation" class="toc-h2 toc-link" data-title="Documentation">Documentation</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#troubleshooting" class="toc-h1 toc-link" data-title="Troubleshooting">Troubleshooting</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#clojure-crashed-killed-by-sigabrt-on-mac" class="toc-h2 toc-link" data-title="clojure crashed, killed by SIGABRT. on Mac"><code>clojure crashed, killed by SIGABRT.</code> on Mac</a>
+                  </li>
+                  <li>
+                    <a href="#unsatisfiedlinkerror-on-m1-mac" class="toc-h2 toc-link" data-title="UnsatisfiedLinkError on M1 Mac"><code>UnsatisfiedLinkError</code> on M1 Mac</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <div class="main-heading">
+          <div class="main">Biff</div>
+          <div class="sub">A batteries-included web framework for Clojure.</div>
+          <div style="margin-top:5px">
+            By <a href="https://jacobobryant.com">Jacob O'Bryant</a>
+            | <a href="/codox/">API docs</a>
+            | <a href="https://github.com/jacobobryant/biff">Github repo</a>
+            | <a href="https://clojurians.slack.com/archives/C013Y4VG20J">Slack channel</a>
+            | <a href="https://blogtrottr.com/?subscribe=https%3A%2F%2Fgithub.com%2Fjacobobryant%2Fbiff%2Freleases.atom">
+            Subscribe</a> to releases
+          </div>
+        </div>
+        <h1 id='introduction'>Introduction</h1>
+<p>Biff is designed to make web development with Clojure fast and easy <a href="#design-philosophy">without
+compromising</a> on simplicity. It prioritizes small-to-medium
+sized projects.</p>
+
+<p>As my schedule allows, I&#39;m happy to provide free mentoring (answering
+questions, reviewing code, pair programming, etc) to anyone who wants to learn
+Clojure web dev with Biff. I&#39;m also available for consulting if you&#39;d like to
+use Biff in your business. In either case, fill out <a href="https://airtable.com/shrKqm1iT3UWySuxe">this quick
+survey</a>.</p>
+
+<p>Distinctive features:</p>
+
+<ul>
+<li><strong>Query subscriptions</strong>. Specify what data the front end needs declaratively,
+and Biff will keep it synced with the back end.</li>
+<li><strong>Authorization rules</strong>. No need to set up a bunch of CRUD endpoints. Queries
+and transactions can be submitted from the front end as long as they pass the
+rules you define.</li>
+<li>Built on <strong>Crux</strong>, the world&#39;s best database (see
+<a href="https://opencrux.com">opencrux.com</a>).</li>
+<li><strong>Biff transactions</strong>, a layer over Crux transactions that provides schema
+enforcement and other conveniences. Patterned after Firebase transactions.</li>
+<li><strong>Authentication</strong>. Email link for now; password and SSO coming later.</li>
+<li><strong>Push-to-deploy</strong>. The project template comes with a script for provisioning
+an Ubuntu server. Biff is 12-factor compliant, so you can easily deploy it
+wherever else you choose, too.</li>
+<li><strong>Great documentation!</strong></li>
+</ul>
+<h2 id='status'>Status</h2>
+<p>I&#39;ve been using Biff in my own projects since May 2020. I now consider it
+stable/production ready, with the caveat that it hasn&#39;t yet been used seriously
+by anyone other than myself as far as I&#39;m aware (hopefully that will change
+soon!). See also the <a href="https://github.com/jacobobryant/biff/issues?q=is%3Aissue+is%3Aopen+label%3A%22high+priority%22">high priority
+issues</a>.</p>
+
+<p>I&#39;ve recently decided to start doing some freelancing, and I&#39;m looking for
+opportunities to build things with Biff (and train others to as well). <a href="mailto:contact@jacobobryant.com">Let me
+know</a> if you have any leads.</p>
+
+<p>Websites built with Biff (all mine so far):</p>
+
+<ul>
+<li><a href="https://sample.findka.com">The Sample</a>, a newsletter recommender system.</li>
+<li><a href="https://essays.findka.com">Findka Essays</a>, an essay recommender system.</li>
+<li><a href="https://discuss.findka.com">Hallway</a>, a discussion aggregator.</li>
+</ul>
+
+<p>If you ship something with Biff, I&#39;ll add it to the list.</p>
+<h2 id='additional-resources'>Additional resources</h2>
+<ul>
+<li><a href="https://soundcloud.com/user-959992602/s4-e27-biff-with-jacob-obryant/s-fpVxrTrP9ZJ">An interview</a> on the ClojureScript Podcast.</li>
+<li><a href="https://console.substack.com/p/console-49">An interview</a> on The Console.</li>
+<li><a href="https://youtu.be/mKqjJH3WiqI">A presentation</a> I gave at re:Clojure 2020 (<a href="https://jacobobryant.com/misc/reclojure-2020-jacobobryant.pdf">slides</a>).</li>
+<li><a href="https://www.youtube.com/watch?v=oYwhrq8hDFo">A presentation</a> I gave at the Clojure Mid-Cities meetup.</li>
+</ul>
+
+<p><br></p>
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/mKqjJH3WiqI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<h1 id='getting-started'>Getting started</h1>
+<p>Requirements:</p>
+
+<ul>
+<li><a href="https://clojure.org/guides/getting_started">clj</a> (v1.10.1.697+)</li>
+<li><a href="https://nodejs.org/">node.js</a></li>
+</ul>
+
+<p>See <a href="#troubleshooting">Troubleshooting</a> if you run into any problems.</p>
+
+<p>Run this command to create a new Biff project:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>bash &lt;(curl -s https://raw.githubusercontent.com/jacobobryant/biff/master/new-project.sh)
+</code></pre></div>
+<p>The template project is a minimal CRUD app which demonstrates most of Biff&#39;s
+features.</p>
+
+<p>NOTE: This page assumes you chose <code>example.core</code> for your project&#39;s main
+namespace. So instead of writing <code>src/&lt;your project&gt;/some-file.clj</code>, we&#39;ll just
+write <code>src/example/some-file.clj</code>.</p>
+<h3 id='development'>Development</h3>
+<p>Run <code>./task dev</code> to start an nREPL server and run the app (on <code>localhost:8080</code>
+by default). See <code>dev/example/dev.clj</code> for reloaded workflow instructions.</p>
+
+<p>If you prefer to start an nREPL server via your editor, you can navigate to
+<code>dev/example/dev.clj</code> and eval <code>(start)</code>. You&#39;ll need to ensure that the <code>:dev</code>
+alias is activated and that the environment variables in <code>config/dev.env</code> have
+been sourced.</p>
+
+<p>Assets (HTML, CSS, CLJS) will be regenerated whenever you save a file. CLJS is
+handled with Shadow CLJS (you can view compilation output at
+<code>localhost:9630/build/app</code>). HTML and CSS are handled with a separate file
+watcher which requires that you eval your changes before saving. For example,
+after running <code>./task dev</code>, go to <code>src/example/views.clj</code>, change <code>&quot;Email
+address:&quot;</code> to <code>&quot;Your email address:&quot;</code>, eval the file, then save it. If you go
+to <code>localhost:8080</code> (and log out if needed), the change should be visible.</p>
+
+<p>Tests will also run whenever you save a file. Similarly, they must be eval&#39;d
+first.</p>
+<h3 id='building'>Building</h3>
+<p>Stop the app if it&#39;s running, then run <code>./task build</code> to generate assets (HTML,
+CSS, CLJS) and build an uberjar at <code>target/app.jar</code>.</p>
+
+<p>Production configuration is stored in <code>config/prod.env</code>. You can deploy your
+uberjar anywhere as long as you set those environment variables somehow. It&#39;s
+assumed that you handle SSL elsewhere (e.g. with Nginx) and then proxy requests
+to the app on localhost.</p>
+
+<p>If you use the server setup script below, you won&#39;t need to run <code>./task build</code>
+locally since it will be done on the server after git push.</p>
+<h3 id='server-setup'>Server setup</h3>
+<p>The project template includes a script for provisioning an Ubuntu server,
+including push-to-deploy. The server should have at least 2 GB of RAM (for
+building). I&#39;ve tested it with DigitalOcean.</p>
+
+<p>If using DigitalOcean: first create a droplet (Ubuntu 20.04 LTS). Switch to
+Regular Intel at $10/month. Add monitoring. Make sure your SSH key is selected.
+(If needed, go to Settings and add your SSH key, then start over). Set the
+hostname to something distinctive. After the droplet is created, go to
+Networking and point your domain to it (create an A record).</p>
+
+<p>Then, update the vars in <code>config/prod.env</code> and <code>config/task.env</code>. Run the setup
+script on your new server, replacing <code>example.com</code> with your domain:</p>
+<div class="highlight"><pre class="highlight shell"><code>scp infra/setup.sh root@example.com:
+ssh root@example.com
+bash setup.sh
+reboot
+</code></pre></div>
+<p>From your local machine, add your server as a remote:</p>
+<div class="highlight"><pre class="highlight shell"><code>git remote add prod ssh://app@example.com/home/app/repo.git
+</code></pre></div><h3 id='deployment'>Deployment</h3>
+<p>Commit your changes locally, then run <code>./task deploy</code>. This will copy
+<code>config/prod.env</code> and then do a git push to the server, which will build the
+uberjar, create a release, and restart the app with the new release.</p>
+
+<p>You can edit <code>infra/post-receive</code> to change what happens after a push.</p>
+<h3 id='monitoring'>Monitoring</h3>
+<p>Run <code>./task logs</code> to tail the systemd logs. Run <code>./task prod-repl</code> to connect
+to the production nREPL server. You can use <code>src/example/admin.clj</code> as an nREPL
+admin console.</p>
+<h1 id='using-this-documentation'>Using this documentation</h1>
+<p>Biff&#39;s documentation is divided between this page, the <a href="https://biff.findka.com/codox/">API
+docs</a>, and the template documentation (the
+in-code comments included when you create a new project). This page is good
+for getting an overview of Biff&#39;s features and as a reference for certain things
+(like the Biff transaction format). You can get the nitty-gritty details from
+exploring the template project, which also contains links to relevant sections of the
+API docs.</p>
+<h1 id='design-philosophy'>Design Philosophy</h1>
+<p>Libraries are simple. Frameworks are easy. Frameworks can be good if they&#39;re
+both simple and easy. Biff attempts to be simple by focusing on
+decomposability: it addresses not only &quot;how should these pieces be put
+together&quot; but also &quot;how can they be taken apart?&quot; Your project might even
+gradually reach the point where it&#39;s no longer a &quot;Biff&quot; project at all.</p>
+
+<p>The following describes how Biff currently tries to reach that ideal, subject
+to refinement.</p>
+<h3 id='code-organization'>Code organization</h3>
+<p>Biff consists of two parts:</p>
+
+<ol>
+<li><p>A collection of libraries. For example, biff.crux has helper functions and
+additional features for Crux, and biff.middleware has some Ring middleware.
+Each of these libraries can be used independently.</p></li>
+<li><p>A project template, which is used by the <a href="#getting-started">new project
+script</a> above. This is where the framework code lives. The
+project template composes the various libraries together for you.</p></li>
+</ol>
+
+<p>By keeping the framework code in the project template, it is easy for you to
+change (you don&#39;t have to copy the source from somewhere) and easy for Biff to
+change (the project template doesn&#39;t need to be backwards compatible).</p>
+
+<p>The project template also acts as a testing ground. New code can go there
+first. With time, the correct abstractions will become clearer, and then the
+code can be moved to one of Biff&#39;s libraries. For example, authentication is
+currently handled entirely within the project template.</p>
+<h3 id='system-composition'>System composition</h3>
+<p>Biff uses a minimalist implementation of Stuart Sierra&#39;s <a href="https://github.com/stuartsierra/component#component">component design
+pattern</a>. The system is
+represented by a single map with flat, namespaced keys. Each component is a
+function that modifies the system map, kind of like Ring middleware modifying
+an incoming request. For example, here&#39;s a Biff component for the web server:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="c1">; As a convention, components are named use-*</span><span class="w">
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">use-jetty</span><span class="w"> </span><span class="p">[{</span><span class="no">:biff/keys</span><span class="w"> </span><span class="p">[</span><span class="n">host</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="n">handler</span><span class="p">]</span><span class="w">
+                  </span><span class="no">:biff.jetty/keys</span><span class="w"> </span><span class="p">[</span><span class="n">quiet</span><span class="w"> </span><span class="n">websockets</span><span class="p">]</span><span class="w">
+                  </span><span class="no">:or</span><span class="w"> </span><span class="p">{</span><span class="n">host</span><span class="w"> </span><span class="s">"localhost"</span><span class="w">
+                       </span><span class="n">port</span><span class="w"> </span><span class="mi">8080</span><span class="p">}</span><span class="w">
+                  </span><span class="no">:as</span><span class="w"> </span><span class="n">sys</span><span class="p">}]</span><span class="w">
+  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">server</span><span class="w"> </span><span class="p">(</span><span class="nf">jetty/run-jetty</span><span class="w"> </span><span class="n">handler</span><span class="w">
+                                </span><span class="p">{</span><span class="no">:host</span><span class="w"> </span><span class="n">host</span><span class="w">
+                                 </span><span class="no">:port</span><span class="w"> </span><span class="n">port</span><span class="w">
+                                 </span><span class="no">:join?</span><span class="w"> </span><span class="n">false</span><span class="w">
+                                 </span><span class="no">:websockets</span><span class="w"> </span><span class="n">websockets</span><span class="w">
+                                 </span><span class="no">:allow-null-path-info</span><span class="w"> </span><span class="n">true</span><span class="p">})]</span><span class="w">
+    </span><span class="p">(</span><span class="nb">when-not</span><span class="w"> </span><span class="n">quiet</span><span class="w">
+      </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"Jetty running on"</span><span class="w"> </span><span class="p">(</span><span class="nb">str</span><span class="w"> </span><span class="s">"http://"</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="s">":"</span><span class="w"> </span><span class="n">port</span><span class="p">)))</span><span class="w">
+    </span><span class="c1">; :biff/stop is a collection of zero-argument functions.</span><span class="w">
+    </span><span class="p">(</span><span class="nf">update</span><span class="w"> </span><span class="n">sys</span><span class="w"> </span><span class="no">:biff/stop</span><span class="w"> </span><span class="nb">conj</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">jetty/stop-server</span><span class="w"> </span><span class="n">server</span><span class="p">))))</span><span class="w">
+</span></code></pre></div>
+<p>Biff components are &quot;principled&quot; (see Systems of Modules from <a href="https://elementsofclojure.com/">Elements of
+Clojure</a>: &quot;We want a collection of principled
+components, built to be discarded, separated by interfaces that are built to
+last&quot;). They provide a few configuration options, and if you want deeper
+customization, you can just copy the source and create a new component that
+does what you need.</p>
+
+<p>Components don&#39;t explicitly define dependencies on other components; they just
+document which keys they need and which keys they provide or modify (via the
+function signature and the doc string). You define the start order manually:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">-main</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="c1">; start-system is essentially the same as (reduce (fn [m f] (f m)) ...).</span><span class="w">
+  </span><span class="p">(</span><span class="nf">biff.util/start-system</span><span class="w">
+    </span><span class="c1">; Initial config</span><span class="w">
+    </span><span class="p">{</span><span class="no">:biff.reitit/routes</span><span class="w"> </span><span class="p">[</span><span class="n">...</span><span class="p">]</span><span class="w">
+     </span><span class="n">...</span><span class="p">}</span><span class="w">
+    </span><span class="c1">; Components</span><span class="w">
+    </span><span class="p">[</span><span class="n">use-env</span><span class="w">
+     </span><span class="n">use-nrepl</span><span class="w">
+     </span><span class="n">use-crux</span><span class="w">
+     </span><span class="n">...</span><span class="p">]))</span><span class="w">
+</span></code></pre></div>
+<p>Since Biff components are just functions, you can easily create wrappers for use
+with Stuart Sierra Component, Mount, etc. if you so desire.</p>
+
+<p>Fun fact: you can even make anonymous components, like
+<code>#(update % :biff/handler wrap-foo)</code>.</p>
+<h1 id='authorization-rules'>Authorization rules</h1>
+<p>When using <a href="#transactions">Biff transactions</a> or <a href="#subscriptions">subscriptions</a>, you&#39;ll
+need to specify relevant &quot;doc types.&quot; These can be defined with either Spec or Malli:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">registry</span><span class="w">
+  </span><span class="p">{</span><span class="no">:user/id</span><span class="w">     </span><span class="no">:uuid</span><span class="w">
+   </span><span class="no">:user/email</span><span class="w">  </span><span class="no">:string</span><span class="w">
+   </span><span class="no">:user/foo</span><span class="w">    </span><span class="no">:string</span><span class="w">
+   </span><span class="no">:user/bar</span><span class="w">    </span><span class="no">:string</span><span class="w">
+   </span><span class="no">:user</span><span class="w">        </span><span class="p">[</span><span class="no">:map</span><span class="w"> </span><span class="p">{</span><span class="no">:closed</span><span class="w"> </span><span class="n">true</span><span class="p">}</span><span class="w">
+                 </span><span class="p">[</span><span class="no">:xt/id</span><span class="w"> </span><span class="no">:user/id</span><span class="p">]</span><span class="w">
+                 </span><span class="no">:user/email</span><span class="w">
+                 </span><span class="p">[</span><span class="no">:user/foo</span><span class="w"> </span><span class="p">{</span><span class="no">:optional</span><span class="w"> </span><span class="n">true</span><span class="p">}]</span><span class="w">
+                 </span><span class="p">[</span><span class="no">:user/bar</span><span class="w"> </span><span class="p">{</span><span class="no">:optional</span><span class="w"> </span><span class="n">true</span><span class="p">}]]</span><span class="w">
+   </span><span class="no">:msg/id</span><span class="w">      </span><span class="no">:uuid</span><span class="w">
+   </span><span class="no">:msg/user</span><span class="w">    </span><span class="no">:user/id</span><span class="w">
+   </span><span class="no">:msg/text</span><span class="w">    </span><span class="no">:string</span><span class="w">
+   </span><span class="no">:msg/sent-at</span><span class="w"> </span><span class="n">inst?</span><span class="w">
+   </span><span class="no">:msg</span><span class="w">         </span><span class="p">[</span><span class="no">:map</span><span class="w"> </span><span class="p">{</span><span class="no">:closed</span><span class="w"> </span><span class="n">true</span><span class="p">}</span><span class="w">
+                 </span><span class="p">[</span><span class="no">:xt/id</span><span class="w"> </span><span class="no">:msg/id</span><span class="p">]</span><span class="w">
+                 </span><span class="no">:msg/user</span><span class="w">
+                 </span><span class="no">:msg/text</span><span class="w">
+                 </span><span class="no">:msg/sent-at</span><span class="p">]})</span><span class="w">
+
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="p">(</span><span class="nf">biff.misc/map-&gt;MalliSchema</span><span class="w">
+              </span><span class="p">{</span><span class="no">:doc-types</span><span class="w"> </span><span class="p">[</span><span class="no">:user</span><span class="w"> </span><span class="no">:msg</span><span class="p">]</span><span class="w">
+               </span><span class="no">:malli-opts</span><span class="w"> </span><span class="p">{</span><span class="no">:registry</span><span class="w"> </span><span class="p">(</span><span class="nf">biff.misc/malli-registry</span><span class="w"> </span><span class="n">registry</span><span class="p">)}}))</span><span class="w">
+
+</span><span class="c1">; For Spec: (biff.misc/map-&gt;SpecSchema {:doc-types [::user ::msg]})</span><span class="w">
+
+</span><span class="p">(</span><span class="nf">biff.util/start-system</span><span class="w">
+  </span><span class="p">{</span><span class="no">:biff/schema</span><span class="w"> </span><span class="n">schema</span><span class="w">
+   </span><span class="n">...</span><span class="w">
+</span></code></pre></div>
+<p>Queries and transactions will be rejected if the documents they affect don&#39;t
+conform to the specified doc types.</p>
+
+<p>Once you&#39;ve defined a doc type, you can create authorization rules for it
+by extending a multimethod:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">(</span><span class="k">defmethod</span><span class="w"> </span><span class="n">biff.crux/authorize</span><span class="w"> </span><span class="p">[</span><span class="no">:user</span><span class="w"> </span><span class="no">:get</span><span class="p">]</span><span class="w">
+  </span><span class="p">[{</span><span class="no">:keys</span><span class="w"> </span><span class="p">[</span><span class="n">biff/uid</span><span class="p">]}</span><span class="w"> </span><span class="p">{</span><span class="no">:keys</span><span class="w"> </span><span class="p">[</span><span class="n">xt/id</span><span class="p">]}]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">=</span><span class="w"> </span><span class="n">uid</span><span class="w"> </span><span class="n">id</span><span class="p">))</span><span class="w">
+</span></code></pre></div>
+<p>There are five operations: <code>#{:get :query :create :update :delete}</code>. There are
+also three aliases: <code>:read</code> (which covers <code>:get</code> and <code>:query</code>), <code>:write</code> (which
+covers <code>:create</code>, <code>:update</code>, and <code>:delete</code>) and <code>:rw</code> (which covers
+everything). The <code>biff.crux/authorize</code> multimethod is dispatched on the doc
+type and the operation. For example, if you try to create a new user, then Biff
+will dispatch on <code>[:user :create]</code>, then <code>[:user :write]</code>, then <code>[:user :rw]</code>.
+If at least one of those methods returns truthy, then the transaction will be
+permitted.</p>
+
+<p>The first argument to <code>authorize</code> is the system map, with some additional keys
+merged in depending on the operation:</p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Operations</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>:biff/uid</code></td>
+<td>All</td>
+<td>The ID of the user who submitted the query/transaction. <code>nil</code> if they&#39;re unauthenticated.</td>
+</tr>
+<tr>
+<td><code>:doc-type</code></td>
+<td>All</td>
+<td>e.g. <code>:user</code></td>
+</tr>
+<tr>
+<td><code>:operation</code></td>
+<td>All</td>
+<td>e.g. <code>:get</code></td>
+</tr>
+<tr>
+<td><code>:doc-id</code></td>
+<td>All</td>
+<td>The relevant document&#39;s ID.</td>
+</tr>
+<tr>
+<td><code>:doc</code></td>
+<td>Read</td>
+<td>The document being read.</td>
+</tr>
+<tr>
+<td><code>:db</code></td>
+<td>Read</td>
+<td>A Crux DB from the time the document is being read.</td>
+</tr>
+<tr>
+<td><code>:before</code></td>
+<td>Write</td>
+<td>The document before the transaction took place (nil if the document is being created).</td>
+</tr>
+<tr>
+<td><code>:after</code></td>
+<td>Write</td>
+<td>The document after the transaction took place (nil if the document is being deleted).</td>
+</tr>
+<tr>
+<td><code>:db-before</code></td>
+<td>Write</td>
+<td>A Crux DB from before the transaction takes place.</td>
+</tr>
+<tr>
+<td><code>:db-after</code></td>
+<td>Write</td>
+<td>A speculative Crux DB from after the transaction would take place (created with <code>crux.api/with-tx</code>).</td>
+</tr>
+<tr>
+<td><code>:server-timestamp</code></td>
+<td>Write</td>
+<td>The value used to replace occurrences of <code>:db/server-timestamp</code> in the transaction.</td>
+</tr>
+</tbody></table>
+
+<p>As a convenience, the second argument passed to <code>authorize</code> is the relevant
+document: <code>doc</code> for read operations, and either <code>before</code> or <code>after</code> for
+write operations. An <code>:update</code> rule will receive two additional arguments:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">(</span><span class="k">defmethod</span><span class="w"> </span><span class="n">authorize</span><span class="w"> </span><span class="p">[</span><span class="no">:user</span><span class="w"> </span><span class="no">:update</span><span class="p">]</span><span class="w">
+  </span><span class="p">[</span><span class="n">sys</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">after</span><span class="p">]</span><span class="w">
+  </span><span class="n">...</span><span class="p">)</span><span class="w">
+</span></code></pre></div><h1 id='transactions'>Transactions</h1>
+<p>Biff has its own transaction format, patterned after Firebase write operations.
+Transactions are a map from &quot;idents&quot; (a tuple of the doc type and the doc ID)
+to &quot;TX docs&quot; (maps that are used to infer what the new documents should be).
+For example, here&#39;s a transaction for creating a new user:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">(</span><span class="nf">biff.crux/submit-tx</span><span class="w">
+  </span><span class="n">sys</span><span class="w">
+  </span><span class="p">{[</span><span class="no">:user</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-uuid"</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:user/email</span><span class="w"> </span><span class="s">"username@example.com"</span><span class="p">}})</span><span class="w">
+</span></code></pre></div>
+<p>If a document with that ID doesn&#39;t exist yet, then this will
+be normalized to the following Crux transaction:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">[[</span><span class="no">:crux.tx/match</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-uuid"</span><span class="w"> </span><span class="n">nil</span><span class="p">]</span><span class="w">
+ </span><span class="p">[</span><span class="no">:crux.tx/put</span><span class="w"> </span><span class="p">{</span><span class="no">:xt/id</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-uuid"</span><span class="w">
+                </span><span class="no">:user/email</span><span class="w"> </span><span class="s">"username@example.com"</span><span class="p">}]]</span><span class="w">
+</span></code></pre></div>
+<p><code>biff.crux/submit-tx</code> adds match operations for each document in the
+transaction. If there&#39;s contention, <code>submit-tx</code> will retry up to three more
+times (first it&#39;ll wait 1 second, then 2, then 4).</p>
+
+<p>By default, doc types are enforced, but authorization rules are not. This is
+suitable for transactions created by trusted code. If you&#39;re receiving a
+transaction from the front end, you should enable authorization rules:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">(</span><span class="nf">biff.crux/submit-tx</span><span class="w">
+  </span><span class="p">(</span><span class="nb">assoc</span><span class="w"> </span><span class="n">sys</span><span class="w"> </span><span class="no">:biff.crux/authorize</span><span class="w"> </span><span class="n">true</span><span class="p">)</span><span class="w">
+  </span><span class="n">tx</span><span class="p">)</span><span class="w">
+</span></code></pre></div>
+<p><code>biff.crux/submit-tx</code> also calls <code>crux.api/await-tx</code> (so it can make sure the
+match operations succeeded).</p>
+
+<p>And of course, you can always use <code>crux.api/submit-tx</code> directly if needed (e.g.
+if you need to use a transaction function or set valid time explicitly).</p>
+<h3 id='tx-docs'>TX docs</h3>
+<p>TX docs are converted to Crux documents with
+<a href="https://biff.findka.com/codox/biff.crux.html#var-normalize-tx-doc"><code>biff.crux/normalize-tx-doc</code></a>
+like so.</p>
+
+<p>If the ident doesn&#39;t include a doc ID, then the server will generate a random
+UUID:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">{[</span><span class="no">:msg</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:msg/text</span><span class="w"> </span><span class="s">"hello"</span><span class="p">}}</span><span class="w">
+</span></code></pre></div>
+<p>If you want to create multiple documents of the same type with random IDs, use
+nested vectors instead of a map.</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">[[[</span><span class="no">:messages</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:text</span><span class="w"> </span><span class="s">"a"</span><span class="p">}]</span><span class="w">
+ </span><span class="p">[[</span><span class="no">:messages</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:text</span><span class="w"> </span><span class="s">"b"</span><span class="p">}]]</span><span class="w">
+</span></code></pre></div>
+<p><code>:db/server-timestamp</code> is replaced by the server with the current time.</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">{[</span><span class="no">:msg</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:msg/sent-at</span><span class="w"> </span><span class="no">:db/server-timestamp</span><span class="w">
+         </span><span class="n">...</span><span class="p">}}</span><span class="w">
+</span></code></pre></div>
+<p>If <code>:db/update</code> is true, the given document will be merged with an existing
+document, failing if the document doesn&#39;t exist. There&#39;s also <code>:db/merge</code> which
+simply creates the document if it doesn&#39;t exist (i.e. upsert).</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">{[</span><span class="no">:chatroom</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-uuid"</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:db/update</span><span class="w"> </span><span class="n">true</span><span class="w">
+                                </span><span class="no">:chatroom/title</span><span class="w"> </span><span class="s">"Existing chatroom"</span><span class="p">}</span><span class="w">
+ </span><span class="p">[</span><span class="no">:chatroom</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"another-uuid"</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:db/merge</span><span class="w"> </span><span class="n">true</span><span class="w">
+                                   </span><span class="no">:chatroom/title</span><span class="w"> </span><span class="s">"New or existing chatroom"</span><span class="p">}}</span><span class="w">
+</span></code></pre></div>
+<p>You can <code>dissoc</code> document keys by setting them to <code>:db/remove</code>. You can
+delete whole documents by setting them to <code>nil</code>.</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">{[</span><span class="no">:user</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-user-id"</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:db/update</span><span class="w"> </span><span class="n">true</span><span class="w">
+                               </span><span class="no">:user/display-name</span><span class="w"> </span><span class="no">:db/remove</span><span class="p">}</span><span class="w">
+ </span><span class="p">[</span><span class="no">:order</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-order-id"</span><span class="p">]</span><span class="w"> </span><span class="n">nil</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>You can add elements to a set with <code>:db/union</code> and remove them with
+<code>:db/difference</code>:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">{[</span><span class="no">:game</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"old-game-uuid"</span><span class="p">]</span><span class="w">
+ </span><span class="p">{</span><span class="no">:db/update</span><span class="w"> </span><span class="n">true</span><span class="w">
+  </span><span class="no">:game/players</span><span class="w"> </span><span class="p">[</span><span class="no">:db/difference</span><span class="w"> </span><span class="s">"my-uid"</span><span class="w"> </span><span class="s">"your-uid"</span><span class="p">]}</span><span class="w">
+
+ </span><span class="p">[</span><span class="no">:game</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"new-game-uuid"</span><span class="p">]</span><span class="w">
+ </span><span class="p">{</span><span class="no">:db/update</span><span class="w"> </span><span class="n">true</span><span class="w">
+  </span><span class="no">:game/players</span><span class="w"> </span><span class="p">[</span><span class="no">:db/union</span><span class="w"> </span><span class="s">"my-uid"</span><span class="w"> </span><span class="s">"your-uid"</span><span class="p">]}}</span><span class="w">
+</span></code></pre></div>
+<p>Similarly, you can increment numbers with <code>:db/add</code>:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">{[</span><span class="no">:store</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-uuid"</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:db/update</span><span class="w"> </span><span class="n">true</span><span class="w">
+                             </span><span class="no">:store/bananas</span><span class="w"> </span><span class="p">[</span><span class="no">:db/add</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w">
+                             </span><span class="no">:store/oranges</span><span class="w"> </span><span class="p">[</span><span class="no">:db/add</span><span class="w"> </span><span class="mi">-92</span><span class="p">]}}</span><span class="w">
+</span></code></pre></div>
+<p>You can use maps as composite IDs. In this case, all keys in the document ID
+will be duplicated in the document itself. This allows you to use document ID
+keys in your queries.</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">{[</span><span class="no">:rating</span><span class="w"> </span><span class="p">{</span><span class="no">:rating/user</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-user-id"</span><span class="w">
+           </span><span class="no">:rating/item</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-item-id"</span><span class="p">}]</span><span class="w">
+ </span><span class="p">{</span><span class="no">:rating/value</span><span class="w"> </span><span class="no">:like</span><span class="p">}}</span><span class="w">
+
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="no">:crux.tx/put</span><span class="w">
+    </span><span class="p">{</span><span class="no">:xt/id</span><span class="w"> </span><span class="p">{</span><span class="no">:rating/user</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-user-id"</span><span class="w">
+                  </span><span class="no">:rating/item</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-item-id"</span><span class="p">}</span><span class="w">
+     </span><span class="no">:rating/user</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-user-id"</span><span class="w">
+     </span><span class="no">:rating/item</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-item-id"</span><span class="w">
+     </span><span class="no">:rating/value</span><span class="w"> </span><span class="no">:like</span><span class="p">}]</span><span class="w">
+</span></code></pre></div><h3 id='receiving-transactions'>Receiving transactions</h3>
+<p>Receiving transactions from the front end is trivial with websockets:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="c1">; front end</span><span class="w">
+</span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">tx</span><span class="w"> </span><span class="n">...</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">send-event</span><span class="w"> </span><span class="p">[</span><span class="no">:example/tx</span><span class="w"> </span><span class="n">tx</span><span class="p">]))</span><span class="w">
+
+</span><span class="c1">; back end</span><span class="w">
+</span><span class="p">(</span><span class="k">defmethod</span><span class="w"> </span><span class="n">api</span><span class="w"> </span><span class="no">:example/tx</span><span class="w">
+  </span><span class="p">[</span><span class="n">sys</span><span class="w"> </span><span class="n">tx</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">biff.crux/submit-tx</span><span class="w"> </span><span class="p">(</span><span class="nb">assoc</span><span class="w"> </span><span class="n">sys</span><span class="w"> </span><span class="no">:biff.crux/authorize</span><span class="w"> </span><span class="n">true</span><span class="p">)</span><span class="w"> </span><span class="n">tx</span><span class="p">))</span><span class="w">
+</span></code></pre></div>
+<p>If you&#39;re doing server-side rendering, you can also submit transactions via an
+HTML form POST, but you&#39;ll need an additional helper function:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">form-tx</span><span class="w"> </span><span class="p">[</span><span class="n">req</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[[</span><span class="n">biff-tx</span><span class="w"> </span><span class="nb">path</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">biff.misc/parse-form-tx</span><span class="w">
+                         </span><span class="n">req</span><span class="w">
+                         </span><span class="c1">; This lets you coerce input field values to EDN values.</span><span class="w">
+                         </span><span class="p">{</span><span class="no">:coercions</span><span class="w"> </span><span class="p">{</span><span class="no">:text</span><span class="w"> </span><span class="nb">identity</span><span class="p">}})]</span><span class="w">
+    </span><span class="p">(</span><span class="nf">biff.crux/submit-tx</span><span class="w"> </span><span class="p">(</span><span class="nb">assoc</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="no">:biff.crux/authorize</span><span class="w"> </span><span class="n">true</span><span class="p">)</span><span class="w"> </span><span class="n">biff-tx</span><span class="p">)</span><span class="w">
+    </span><span class="p">{</span><span class="no">:status</span><span class="w"> </span><span class="mi">302</span><span class="w">
+     </span><span class="no">:headers/location</span><span class="w"> </span><span class="nb">path</span><span class="p">}))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">ssr</span><span class="w"> </span><span class="p">[{</span><span class="no">:keys</span><span class="w"> </span><span class="p">[</span><span class="n">biff/uid</span><span class="w"> </span><span class="n">biff.crux/db</span><span class="w"> </span><span class="n">params/updated</span><span class="p">]}]</span><span class="w">
+  </span><span class="n">...</span><span class="w">
+  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">{{</span><span class="no">:user/keys</span><span class="w"> </span><span class="p">[</span><span class="n">display-name</span><span class="w"> </span><span class="n">likes-cheese</span><span class="p">]}</span><span class="w"> </span><span class="p">(</span><span class="nf">crux.api/entity</span><span class="w"> </span><span class="o">@</span><span class="n">db</span><span class="w"> </span><span class="n">uid</span><span class="p">)}</span><span class="w">
+    </span><span class="p">[</span><span class="no">:form</span><span class="w"> </span><span class="p">{</span><span class="no">:action</span><span class="w"> </span><span class="s">"/api/form-tx"</span><span class="w">
+            </span><span class="no">:method</span><span class="w"> </span><span class="s">"post"</span><span class="p">}</span><span class="w">
+     </span><span class="p">[</span><span class="no">:input</span><span class="w"> </span><span class="p">{</span><span class="no">:type</span><span class="w"> </span><span class="s">"hidden"</span><span class="w">
+              </span><span class="no">:name</span><span class="w"> </span><span class="s">"__anti-forgery-token"</span><span class="w">
+              </span><span class="no">:value</span><span class="w"> </span><span class="n">ring.middleware.anti-forgery/*anti-forgery-token*</span><span class="p">}]</span><span class="w">
+     </span><span class="p">[</span><span class="no">:input</span><span class="w"> </span><span class="p">{</span><span class="no">:type</span><span class="w"> </span><span class="s">"hidden"</span><span class="w">
+              </span><span class="no">:name</span><span class="w"> </span><span class="s">"tx-info"</span><span class="w">
+              </span><span class="no">:value</span><span class="w"> </span><span class="p">(</span><span class="nb">pr-str</span><span class="w">
+                       </span><span class="p">{</span><span class="no">:tx</span><span class="w"> </span><span class="p">{[</span><span class="no">:user</span><span class="w"> </span><span class="n">uid</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:db/update</span><span class="w"> </span><span class="n">true</span><span class="w">
+                                          </span><span class="no">:user/display-name</span><span class="w"> </span><span class="ss">'display-name</span><span class="w">
+                                          </span><span class="no">:user/likes-cheese</span><span class="w"> </span><span class="ss">'likes-cheese</span><span class="p">}}</span><span class="w">
+                        </span><span class="no">:fields</span><span class="w"> </span><span class="o">'</span><span class="p">{</span><span class="n">display-name</span><span class="w"> </span><span class="no">:text</span><span class="w">
+                                  </span><span class="n">likes-cheese</span><span class="w"> </span><span class="no">:checkbox</span><span class="p">}</span><span class="w">
+                        </span><span class="no">:redirect</span><span class="w"> </span><span class="no">::ssr</span><span class="w">
+                        </span><span class="no">:query-params</span><span class="w"> </span><span class="p">{</span><span class="no">:updated</span><span class="w"> </span><span class="n">true</span><span class="p">}})}]</span><span class="w">
+     </span><span class="p">[</span><span class="no">:div</span><span class="w"> </span><span class="s">"Display name"</span><span class="p">]</span><span class="w">
+     </span><span class="p">[</span><span class="no">:input</span><span class="w"> </span><span class="p">{</span><span class="no">:name</span><span class="w"> </span><span class="s">"display-name"</span><span class="w">
+              </span><span class="no">:type</span><span class="w"> </span><span class="s">"text"</span><span class="w">
+              </span><span class="no">:value</span><span class="w"> </span><span class="n">display-name</span><span class="p">}]</span><span class="w">
+     </span><span class="p">[</span><span class="no">:div</span><span class="w"> </span><span class="s">"Like cheese?"</span><span class="p">]</span><span class="w">
+     </span><span class="p">[</span><span class="no">:input</span><span class="w"> </span><span class="p">{</span><span class="no">:name</span><span class="w"> </span><span class="s">"likes-cheese"</span><span class="w">
+              </span><span class="no">:type</span><span class="w"> </span><span class="s">"checkbox"</span><span class="w">
+              </span><span class="no">:checked</span><span class="w"> </span><span class="p">(</span><span class="nb">when</span><span class="w"> </span><span class="n">likes-cheese</span><span class="w"> </span><span class="s">"checked"</span><span class="p">)}]</span><span class="w">
+     </span><span class="p">[</span><span class="no">:button</span><span class="w"> </span><span class="p">{</span><span class="no">:type</span><span class="w"> </span><span class="s">"submit"</span><span class="p">}</span><span class="w"> </span><span class="s">"Update"</span><span class="p">]])</span><span class="w">
+  </span><span class="p">(</span><span class="nb">when</span><span class="w"> </span><span class="n">updated</span><span class="w">
+    </span><span class="p">[</span><span class="no">:div</span><span class="w"> </span><span class="s">"Transaction submitted."</span><span class="p">])</span><span class="w">
+  </span><span class="n">...</span><span class="p">)</span><span class="w">
+
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">routes</span><span class="w">
+  </span><span class="p">[[</span><span class="s">"/app/ssr"</span><span class="w"> </span><span class="p">{</span><span class="no">:get</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">biff.rum/render</span><span class="w"> </span><span class="n">ssr</span><span class="w"> </span><span class="n">%</span><span class="p">)</span><span class="w">
+                </span><span class="no">:name</span><span class="w"> </span><span class="no">::ssr</span><span class="w">
+                </span><span class="c1">; The client can only specify redirects to routes that set</span><span class="w">
+                </span><span class="c1">; this.</span><span class="w">
+                </span><span class="no">:biff/redirect</span><span class="w"> </span><span class="n">true</span><span class="p">}]</span><span class="w">
+   </span><span class="p">[</span><span class="s">"/api/form-tx"</span><span class="w"> </span><span class="p">{</span><span class="no">:post</span><span class="w"> </span><span class="n">form-tx</span><span class="p">}]])</span><span class="w">
+</span></code></pre></div><h1 id='subscriptions'>Subscriptions</h1>
+<p>Use <a href="https://biff.findka.com/codox/biff.client.html#var-init-sub"><code>biff.client/init-sub</code></a>
+to manage subscriptions on the front end. For example:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">subscriptions</span><span class="w">
+  </span><span class="p">(</span><span class="nf">atom</span><span class="w"> </span><span class="o">#</span><span class="p">{[</span><span class="no">:example/sub</span><span class="w"> </span><span class="p">{</span><span class="no">:doc-type</span><span class="w"> </span><span class="no">:user</span><span class="w">
+                         </span><span class="no">:where</span><span class="w"> </span><span class="o">'</span><span class="p">[[</span><span class="no">:user/name</span><span class="w"> </span><span class="nb">name</span><span class="p">]</span><span class="w">
+                                  </span><span class="p">[</span><span class="no">:user/age</span><span class="w"> </span><span class="n">age</span><span class="p">]</span><span class="w">
+                                  </span><span class="p">[(</span><span class="nb">&lt;=</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="n">age</span><span class="p">)]]}]}))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">sub-results</span><span class="w"> </span><span class="p">(</span><span class="nf">atom</span><span class="w"> </span><span class="p">{}))</span><span class="w">
+
+</span><span class="p">(</span><span class="nf">biff.client/init-sub</span><span class="w">
+  </span><span class="p">{</span><span class="no">:url</span><span class="w"> </span><span class="s">"/api/chsk"</span><span class="w">
+   </span><span class="no">:subscriptions</span><span class="w"> </span><span class="n">subscriptions</span><span class="w">
+   </span><span class="no">:sub-results</span><span class="w"> </span><span class="n">sub-results</span><span class="p">})</span><span class="w">
+
+</span><span class="c1">; Wait for it...</span><span class="w">
+
+</span><span class="o">@</span><span class="n">sub-results</span><span class="w">
+</span><span class="n">=&gt;</span><span class="w"> </span><span class="p">{{</span><span class="no">:doc-type</span><span class="w"> </span><span class="no">:user</span><span class="w">
+     </span><span class="no">:where</span><span class="w"> </span><span class="o">'</span><span class="p">[[</span><span class="no">:user/name</span><span class="w"> </span><span class="nb">name</span><span class="p">]</span><span class="w">
+              </span><span class="p">[</span><span class="no">:user/age</span><span class="w"> </span><span class="n">age</span><span class="p">]</span><span class="w">
+              </span><span class="p">[(</span><span class="nb">&lt;=</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="n">age</span><span class="p">)]]}</span><span class="w">
+    </span><span class="p">{</span><span class="no">:user</span><span class="w"> </span><span class="p">{</span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-uuid"</span><span class="w"> </span><span class="p">{</span><span class="no">:xt/id</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-uuid"</span><span class="w">
+                               </span><span class="no">:user/name</span><span class="w"> </span><span class="s">"Hoid"</span><span class="w">
+                               </span><span class="no">:user/age</span><span class="w"> </span><span class="mi">43</span><span class="p">}}}}</span><span class="w">
+</span></code></pre></div>
+<p>If you want to subscribe to a query, <code>swap!</code> it into <code>subscriptions</code>. If you
+want to unsubscribe, <code>swap!</code> it out. Biff will populate <code>sub-results</code> with the
+results of your queries and remove old data when you unsubscribe.</p>
+
+<p>You can use
+<a href="https://biff.findka.com/codox/biff.rum.html#var-defderivations"><code>defderivations</code></a>
+to define your subscriptions as a function of your application state, and to
+derive your application state from the contents of <code>sub-results</code>.</p>
+<h3 id='subscription-query-format'>Subscription query format</h3>
+<p>Each element of <code>subscriptions</code> is a websocket (Sente) event. The event ID
+corresponds to one of your back-end event handlers (see
+<a href="https://biff.findka.com/codox/biff.crux.html#var-handle-subscribe-event.21">biff.crux/handle-subscribe-event!</a>),
+and the event data is a Biff query.</p>
+
+<p>A Biff query is basically a Crux query without joins. Since all clauses apply
+to the same document, we omit the document ID logic variable. We also include a
+doc-type.</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">{</span><span class="no">:doc-type</span><span class="w"> </span><span class="no">:user</span><span class="w">
+ </span><span class="no">:where</span><span class="w"> </span><span class="o">'</span><span class="p">[[</span><span class="no">:user/name</span><span class="w"> </span><span class="nb">name</span><span class="p">]</span><span class="w">
+          </span><span class="p">[</span><span class="no">:user/age</span><span class="w"> </span><span class="n">age</span><span class="p">]</span><span class="w">
+          </span><span class="p">[(</span><span class="nb">&lt;=</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="n">age</span><span class="p">)]]}</span><span class="w">
+</span></code></pre></div>
+<p>By default, the only operators allowed are <code>#{= not= &lt; &gt; &lt;= &gt;= == !=}</code>. If you want
+to use other functions, you&#39;ll have to whitelist them in your system map.</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">(</span><span class="nf">biff.util/start-system</span><span class="w">
+  </span><span class="p">{</span><span class="no">:biff.crux/fn-whitelist</span><span class="w"> </span><span class="p">[</span><span class="ss">'even?</span><span class="w"> </span><span class="ss">'example.core/likes-cheese?</span><span class="p">]</span><span class="w">
+   </span><span class="n">...</span><span class="w">
+</span></code></pre></div>
+<p>You can subscribe to a specific document by providing the document ID in your
+query:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">{</span><span class="no">:doc-type</span><span class="w"> </span><span class="no">:user</span><span class="w">
+ </span><span class="no">:id</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-uuid"</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>If you want to load a query but you don&#39;t actually care about getting updates
+when the results change, use <code>:static</code>:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">{</span><span class="no">:doc-type</span><span class="w"> </span><span class="no">:user</span><span class="w">
+ </span><span class="no">:id</span><span class="w"> </span><span class="o">#</span><span class="n">uuid</span><span class="w"> </span><span class="s">"some-uuid"</span><span class="w">
+ </span><span class="no">:static</span><span class="w"> </span><span class="n">true</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='subscription-interface'>Subscription interface</h3>
+<p><code>biff.client/init-sub</code> is not coupled to Crux subscriptions. You can provide
+other kinds of subscriptions as long as you define an appropriate event
+handler. For example, if <code>subscriptions</code> is set to <code>#{[:example/foo :ant-info]}</code>,
+the back end would receive an event of <code>[:example/foo {:query :ant-info
+:action :subscribe}]</code>. Your event handler would need to send back an event of
+the form <code>[:example/foo {:query :ant-info :ident-&gt;doc ...}]</code> where
+<code>:ident-&gt;doc</code> looks something like this:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">{[</span><span class="no">:ant</span><span class="w"> </span><span class="no">:harry</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:ant/id</span><span class="w"> </span><span class="no">:harry</span><span class="w">
+                </span><span class="no">:ant/likes</span><span class="w"> </span><span class="s">"orange juice"</span><span class="p">}</span><span class="w">
+ </span><span class="p">[</span><span class="no">:ant</span><span class="w"> </span><span class="no">:sally</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="no">:ant/id</span><span class="w"> </span><span class="no">:sally</span><span class="w">
+                </span><span class="no">:ant/likes</span><span class="w"> </span><span class="s">"investing"</span><span class="p">}}</span><span class="w">
+</span></code></pre></div>
+<p>You&#39;d also need to send another event whenever the query results change, and
+you&#39;d need to clean up any subscription state if the client&#39;s websocket
+connection ends. <code>:action</code> could also be <code>:unsubscribe</code> or <code>:reconnect</code>, so
+you&#39;d need to handle those too (<code>:reconnect</code> means that the websocket
+connection is being re-established, but the client still has previous query
+results).</p>
+<h1 id='authentication'>Authentication</h1>
+<p>The project template comes with some routes for email link authentication. When
+a user signs in/signs up, Biff will email them a link containing a JWT. If they
+click the link, Biff stores their user ID (the Crux doc ID of their user
+document, a UUID) in an <a href="https://ring-clojure.github.io/ring/ring.middleware.session.cookie.html">encrypted session
+cookie</a>. You
+must provide a Mailgun API key (or define your own function for sending emails),
+otherwise the login links will only be printed to the console.</p>
+
+<p>A nice thing about this setup is that the implementation is extremely simple
+and it gets the job done. You also don&#39;t have to model unconfirmed email
+addresses since user documents aren&#39;t created until they&#39;ve clicked the link
+you sent. However, implementing more authentication methods (especially
+password) is a priority. See
+<a href="https://github.com/jacobobryant/biff/issues/18">#18</a>.</p>
+
+<p>Other notes:</p>
+
+<ul>
+<li>The CSRF token is provided in another (non-http-only) cookie so that SPA pages
+can include it with request headers.</li>
+<li>Ring requests will include the authenticated user ID under the <code>:biff/uid</code> key.</li>
+<li>The project template will use reCAPTCHA v3 for bot detection if you provide
+a secret key.</li>
+</ul>
+<h1 id='system-map'>System map</h1>
+<p>The <a href="#system-composition">system map</a> is merged with incoming Ring requests and
+Sente events. It&#39;s also passed to authorization methods. Thus, your application code
+can access all configuration and resources via the system map. Some notable keys:</p>
+
+<ul>
+<li><code>:biff.crux/node</code>: The Crux node.</li>
+<li><code>:biff.crux/db</code>: A <code>delay</code>ed Crux DB, set by middleware. It&#39;s created with
+<code>biff.crux/open-db</code>. If you don&#39;t deref the DB, it won&#39;t be created.</li>
+<li><code>:biff/handler</code>: The Ring handler, created from your Reitit routes.</li>
+<li><code>:biff.reitit/router</code>: You can use this to look up routes by name.</li>
+<li><code>:biff.sente/*</code>: All keys returned by <code>sente/make-channel-socket!</code> are prefixed
+with <code>biff.sente</code> and merged into the system map.</li>
+</ul>
+<h1 id='recipes'>Recipes</h1><h2 id='scheduled-tasks'>Scheduled tasks</h2>
+<p>See <a href="https://github.com/jacobobryant/biff/issues/87">#87</a>. In the mean time,
+you can use <a href="https://github.com/jarohen/chime">chime</a>, as long as you don&#39;t
+need to coordinate multiple servers:</p>
+<div class="highlight"><pre class="highlight clojure tab-clojure"><code><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">my-task</span><span class="w"> </span><span class="p">[</span><span class="n">sys</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nb">println</span><span class="w"> </span><span class="s">"This task will run every hour,"</span><span class="w">
+           </span><span class="s">"starting 5 minutes after system start."</span><span class="p">))</span><span class="w">
+
+</span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">recurring-tasks</span><span class="w">
+  </span><span class="p">[{</span><span class="no">:offset-minutes</span><span class="w"> </span><span class="mi">5</span><span class="w">
+    </span><span class="no">:period-minutes</span><span class="w"> </span><span class="mi">60</span><span class="w">
+    </span><span class="no">:task-fn</span><span class="w"> </span><span class="o">#</span><span class="ss">'my-task</span><span class="p">}])</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">use-chime</span><span class="w"> </span><span class="p">[</span><span class="n">sys</span><span class="p">]</span><span class="w">
+  </span><span class="p">(</span><span class="nf">update</span><span class="w"> </span><span class="n">sys</span><span class="w"> </span><span class="no">:biff/stop</span><span class="w"> </span><span class="nb">into</span><span class="w">
+          </span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="p">[{</span><span class="no">:keys</span><span class="w"> </span><span class="p">[</span><span class="n">offset-minutes</span><span class="w"> </span><span class="n">period-minutes</span><span class="w"> </span><span class="n">task-fn</span><span class="p">]}</span><span class="w"> </span><span class="n">recurring-tasks</span><span class="p">]</span><span class="w">
+            </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">closeable</span><span class="w"> </span><span class="p">(</span><span class="nf">chime.core/chime-at</span><span class="w">
+                              </span><span class="p">(</span><span class="nf">-&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">biff.util/add-seconds</span><span class="w"> </span><span class="p">(</span><span class="nf">java.util.Date.</span><span class="p">)</span><span class="w">
+                                                          </span><span class="p">(</span><span class="nb">*</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="n">offset-minutes</span><span class="p">))</span><span class="w">
+                                   </span><span class="p">(</span><span class="nb">iterate</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">biff.util/add-seconds</span><span class="w"> </span><span class="n">%</span><span class="w"> </span><span class="p">(</span><span class="nb">*</span><span class="w"> </span><span class="n">period-minutes</span><span class="w"> </span><span class="mi">60</span><span class="p">)))</span><span class="w">
+                                   </span><span class="p">(</span><span class="nb">map</span><span class="w"> </span><span class="o">#</span><span class="p">(</span><span class="nf">.toInstant</span><span class="w"> </span><span class="n">%</span><span class="p">)))</span><span class="w">
+                              </span><span class="p">(</span><span class="k">fn</span><span class="w"> </span><span class="p">[</span><span class="n">_</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="nf">task-fn</span><span class="w"> </span><span class="n">sys</span><span class="p">)))]</span><span class="w">
+              </span><span class="o">#</span><span class="p">(</span><span class="nf">.close</span><span class="w"> </span><span class="n">closeable</span><span class="p">)))))</span><span class="w">
+</span></code></pre></div><h2 id='babashka-tasks'>Babashka tasks</h2>
+<p>If you need to add more complicated tasks, you may want to start using <a href="https://book.babashka.org/#tasks">bb
+tasks</a> instead of the <code>task</code> shell script.
+See Biff&#39;s own <a href="https://github.com/jacobobryant/biff/blob/master/bb.edn">bb.edn file</a>
+for an example.</p>
+<h2 id='server-side-rendering'>Server-side rendering</h2>
+<p>If you&#39;re making a simple site, a SPA might be overkill. If so, you can omit
+the <code>use-sente</code>, <code>use-crux-sub-notifier</code>, and <code>use-shadow-cljs</code> components, as
+well as all the ClojureScript code and the websocket event handlers.</p>
+
+<p><a href="#receiving-transactions">As mentioned</a>, you can still use Biff&#39;s handy dandy,
+auto-authorized transactions via HTML forms.</p>
+<h2 id='replacing-rum'>Replacing Rum</h2>
+<p>You can use Reagent/Re-frame/etc instead if you like. Mainly you&#39;ll just need a
+replacement for <code>biff.rum/defderivations</code>.</p>
+<h2 id='other-deployment-options'>Other deployment options</h2>
+<p>Deploying to <a href="https://render.com">Render</a> would be interesting, though probably
+not worth the price increase over a plain VPS (3-4x more than a DigitalOcean
+droplet for equivalent RAM last I checked) unless you&#39;re planning to scale
+fast. You&#39;ll need to make a Dockerfile. I also don&#39;t know if they let you
+expose TCP ports, which is necessary for nREPL. (nREPL can work <a href="https://blog.jakubholy.net/nrepl-over-http-with-drwabridge-in-2020/">over
+HTTP</a>, but
+I&#39;m not aware of any editors that support it).</p>
+<h1 id='contributing'>Contributing</h1>
+<p>There are several ways you can help out:</p>
+
+<ul>
+<li>Use Biff and let me know what problems you run into.</li>
+<li>Blog about using Biff (I&#39;ll list articles under <a href="#additional-resources">Additional
+resources</a>).</li>
+<li>Submit PRs. See the <a href="https://github.com/jacobobryant/biff/issues">issues</a>.</li>
+</ul>
+
+<p>The easiest way to hack on Biff is to run <code>bb libs:dev</code>, start a new project
+(see <a href="#getting-started">Getting started</a>) and then change the <code>biff/main</code> and
+<code>biff/dev</code> dependencies in <code>deps.edn</code> to <code>{:local/root
+&quot;/path/to/cloned/biff/repo/...&quot;}</code>. You can also include the <code>biff/tests</code>
+library.</p>
+<h2 id='documentation'>Documentation</h2>
+<p>You&#39;ll need Babashka and Ruby; then run:</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nb">cd </span>slate
+gem <span class="nb">install </span>bundler
+bundle <span class="nb">install
+cd</span> ..
+</code></pre></div>
+<p>After that, you can run <code>bb slate:dev</code> and edit <code>slate/source/index.html.md</code>
+to work on the documentation. See the <a href="https://github.com/jacobobryant/biff/tree/master/slate">Slate
+README</a>.</p>
+<h1 id='troubleshooting'>Troubleshooting</h1><h3 id='clojure-crashed-killed-by-sigabrt-on-mac'><code>clojure crashed, killed by SIGABRT.</code> on Mac</h3>
+<p>Try using AdoptOpenJDK (see <a href="https://github.com/juxt/crux/issues/894">crux#894</a>).</p>
+<h3 id='unsatisfiedlinkerror-on-m1-mac'><code>UnsatisfiedLinkError</code> on M1 Mac</h3>
+<p>This is a RocksDB issue, see
+<a href="https://github.com/facebook/rocksdb/issues/7720">rocksdb#7720</a>. In the mean
+time you can run a <a href="https://itnext.io/how-to-install-x86-and-arm-jdks-on-the-mac-m1-apple-silicon-using-sdkman-872a5adc050d">different JDK with
+Rosetta</a>.</p>
+
+<p>Example of full error message:</p>
+
+<p><code>Execution error (UnsatisfiedLinkError) at java.lang.ClassLoader$NativeLibrary/load0 (ClassLoader.java:-2). /private/var/folders/ns/8_1zl3n134d5dlkdscjntbh40000gn/T/crux_rocksdb-6.12.7/librocksdbjni-osx.jnilib: dlopen(/private/var/folders/ns/8_1zl3n134d5dlkdscjntbh40000gn/T/crux_rocksdb-6.12.7/librocksdbjni-osx.jnilib, 1): no suitable image found. Did find: /private/var/folders/ns/8_1zl3n134d5dlkdscjntbh40000gn/T/crux_rocksdb-6.12.7/librocksdbjni-osx.jnilib: mach-o, but wrong architecture /private/var/folders/ns/8_1zl3n134d5dlkdscjntbh40000gn/T/crux_rocksdb-6.12.7/librocksdbjni-osx.jnilib: mach-o, but wrong architecture</code></p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="Clojure">Clojure</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
