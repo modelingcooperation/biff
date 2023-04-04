@@ -1,15 +1,14 @@
 {:paths ["src"],
  :deps
- {clj-http/clj-http {:mvn/version "3.12.1"},
-  metosin/reitit-ring {:mvn/version "0.5.13"},
-  com.taoensso/sente {:mvn/version "1.16.2"},
-  metosin/malli {:mvn/version "0.5.1"},
+ {clj-http/clj-http #:mvn{:version "3.12.1"},
+  metosin/reitit-ring #:mvn{:version "0.5.13"},
+  com.taoensso/sente #:mvn{:version "1.16.2"},
+  metosin/malli #:mvn{:version "0.5.1"},
   biff/util
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/util",
-   :sha "a915c9fbe1940b5ef6734cfd76af5d6cd4c3966b"},
-  nrepl/nrepl {:mvn/version "0.8.3"},
-  info.sunng/ring-jetty9-adapter {:mvn/version "0.14.3"},
-  buddy/buddy-sign {:mvn/version "3.4.1"},
-  lambdaisland/uri {:mvn/version "1.4.54"}
-  borkdude/dynaload {:mvn/version "0.3.5"}}}
+   :sha "5090bf80a6d18fe6db0aa9861419f83a892b4924"},
+  nrepl/nrepl #:mvn{:version "0.8.3"},
+  info.sunng/ring-jetty9-adapter #:mvn{:version "0.14.3"},
+  buddy/buddy-sign #:mvn{:version "3.4.1"},
+  lambdaisland/uri #:mvn{:version "1.4.54"}}}

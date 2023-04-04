@@ -1,8 +1,8 @@
 {:paths ["src" "resources"],
  :deps
- {buddy/buddy-sign {:mvn/version "3.4.1"},
-  selmer/selmer {:mvn/version "1.12.40"},
+ {buddy/buddy-sign #:mvn{:version "3.4.1"},
+  selmer/selmer #:mvn{:version "1.12.40"},
   biff/util
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/util",
-   :sha "a915c9fbe1940b5ef6734cfd76af5d6cd4c3966b"}}}
+   :sha "5090bf80a6d18fe6db0aa9861419f83a892b4924"}}}
