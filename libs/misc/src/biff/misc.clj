@@ -2,6 +2,7 @@
   "Functions that don't have enough siblings for their own library."
   (:require [biff.util :as bu]
             [biff.util.protocols :as proto]
+            [borkdude.dynaload :as dynaload]
             [buddy.core.nonce :as nonce]
             [buddy.sign.jwt :as jwt]
             [clj-http.client :as http]
@@ -17,9 +18,14 @@
             [nrepl.server :as nrepl]
             [reitit.core :as reitit]
             [reitit.ring :as reitit-ring]
-            [ring.adapter.jetty9 :as jetty]
-            [taoensso.sente :as sente]
-            [taoensso.sente.server-adapters.jetty9 :as sente-jetty]))
+            [taoensso.sente :as sente]))
+
+(def ^:no-doc run-jetty
+  (dynaload/dynaload 'ring.adapter.jetty9/run-jetty))
+(def ^:no-doc stop-server
+  (dynaload/dynaload 'ring.adapter.jetty9/stop-server))
+(def ^:no-doc get-sch-adapter
+  (dynaload/dynaload 'taoensso.sente.server-adapters.jetty9/get-sch-adapter))
 
 (defn use-nrepl
   "Starts an nREPL server.
@@ -82,15 +88,15 @@
     :or {host "localhost"
          port 8080}
     :as sys}]
-  (let [server (jetty/run-jetty handler
-                                {:host host
-                                 :port port
-                                 :join? false
-                                 :websockets websockets
-                                 :allow-null-path-info true})]
+  (let [server (run-jetty handler
+                          {:host host
+                           :port port
+                           :join? false
+                           :websockets websockets
+                           :allow-null-path-info true})]
     (when-not quiet
       (println "Jetty running on" (str "http://" host ":" port)))
-    (update sys :biff/stop conj #(jetty/stop-server server))))
+    (update sys :biff/stop conj #(stop-server server))))
 
 (defn jwt-encrypt
   "TODO add docstring"
@@ -195,10 +201,14 @@
            biff.sente/event-handler
            biff.sente/route
            biff.reitit/routes]
-    :or {adapter (sente-jetty/get-sch-adapter)
-         route "/api/chsk"}
+    :or {route "/api/chsk"}
     :as sys}]
-  (let [{:keys [ajax-get-or-ws-handshake-fn
+  (let [;; We set the default adapter here instead of in the parameter
+        ;; declaration so that `get-sch-adapter` only gets called if there is
+        ;; no adapter provided. This allows us to run this function without the
+        ;; default Jetty dependency being available.
+        adapter (or adapter (get-sch-adapter))
+        {:keys [ajax-get-or-ws-handshake-fn
                 ajax-post-fn]
          :as result} (sente/make-channel-socket!
                        adapter

@@ -11,4 +11,5 @@
   nrepl/nrepl {:mvn/version "0.8.3"},
   info.sunng/ring-jetty9-adapter {:mvn/version "0.14.3"},
   buddy/buddy-sign {:mvn/version "3.4.1"},
-  lambdaisland/uri {:mvn/version "1.4.54"}}}
+  lambdaisland/uri {:mvn/version "1.4.54"}
+  borkdude/dynaload {:mvn/version "0.3.5"}}}
