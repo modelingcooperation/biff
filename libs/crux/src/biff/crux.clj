@@ -291,7 +291,7 @@
   :doc-type
   :doc-id"
   [{:keys [db server-timestamp biff-tx random-uuids]}]
-  (for [[[[doc-type doc-id] tx-doc :as tx-item]
+  (for [[[[doc-type doc-id valid-time] tx-doc :as tx-item]
          random-uuid] (map vector biff-tx random-uuids)
         :let [doc-id (or doc-id random-uuid)
               before (crux/entity db doc-id)
@@ -305,12 +305,14 @@
      :doc-id doc-id
      :doc-type doc-type
      :before before
-     :after after}))
+     :after after
+     :valid-time valid-time}))
 
 (def ^:no-doc biff-tx-schema
   [:sequential {:registry {:doc-type keyword?
                            :doc-id any?
-                           :ident [:cat :doc-type [:? :doc-id]]
+                           :valid-time inst?
+                           :ident [:cat :doc-type [:? :doc-id] [:? :valid-time]]
                            :doc [:maybe [:map-of keyword? any?]]
                            :tx-item [:tuple :ident :doc]}}
    :tx-item])
@@ -347,9 +349,11 @@
                   (mapv (fn [{:keys [doc-id before]}]
                           [:xtdb.api/match doc-id before])
                         changes)
-                  (mapv (fn [{:keys [after doc-id]}]
+                  (mapv (fn [{:keys [valid-time after doc-id]}]
                           (if after
-                            [:xtdb.api/put after]
+                            (if valid-time
+                              [:xtdb.api/put after valid-time]
+                              [:xtdb.api/put after])
                             [:xtdb.api/delete doc-id]))
                         changes))]
     (doseq [{:keys [before doc-type]
@@ -438,7 +442,12 @@
                          [(some :xt/id [before after])
                           [before after]]))))
              (into {}))
-
+        norm-tx-info-queries (->> subscriptions
+                                  (map :query)
+                                  (filter :tx-info)
+                                  (map normalize-query)
+                                  distinct
+                                  set)
         norm-query->id->doc
         (with-open [node (crux/start-node {})]
           (with-open [empty-db (crux/open-db node)]
@@ -453,7 +462,17 @@
                                                             {:query query
                                                              :doc doc
                                                              :empty-db empty-db}))
-                                                 doc))
+                                                 (if (norm-tx-info-queries query)
+                                                   (merge doc
+                                                          (-> (crux/entity-tx db-after id)
+                                                              ;; Reading the deserialized
+                                                              ;; content hash as well as the
+                                                              ;; XTDB ID requires knowing a
+                                                              ;; special reader tag that we
+                                                              ;; can't parse on the front end.
+                                                              (dissoc :xtdb.api/content-hash)
+                                                              (dissoc :xt/id)))
+                                                   doc)))
                                              docs)]
                                   :when (not= before after)]
                               [id after])
@@ -570,7 +589,7 @@
   [{:keys [biff.crux/db
            biff.crux/fn-whitelist]
     :as sys}
-   {:keys [id where doc-type] :as query}]
+   {:keys [id where doc-type tx-info] :as query}]
   (let [fn-whitelist (into #{'= 'not= '< '> '<= '>= '== '!=} fn-whitelist)
         bad-fn (some (fn [clause]
                        (not (or (attr-clause? clause)
@@ -586,7 +605,19 @@
                                  where)}
         docs (if (some? id)
                (some-> (crux/entity @db id) vector)
-               (map first (crux/q @db crux-query)))]
+               (map first (crux/q @db crux-query)))
+        docs (if tx-info
+               (map (fn [{:xt/keys [id] :as doc}]
+                      (merge doc
+                             (-> (crux/entity-tx @db id)
+                                 ;; Reading the deserialized content hash as
+                                 ;; well as the XTDB ID requires knowing a
+                                 ;; special reader tag that we can't parse on
+                                 ;; the front end.
+                                 (dissoc :xtdb.api/content-hash)
+                                 (dissoc :xt/id))))
+                    docs)
+               docs)]
     (when-some [bad-doc (check-read
                           sys
                           {:docs docs
