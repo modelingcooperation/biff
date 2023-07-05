@@ -49,7 +49,9 @@
         ready-pr (js/Promise.
                    (fn [done]
                      (take! ready-ch done)))]
-    (-> (sente/make-channel-socket-client! url csrf-token {:type :auto})
+    (-> (sente/make-channel-socket-client! url
+                                           csrf-token
+                                           {:type :auto :wrap-recv-evs? true})
         (update :send-fn wrap-send-fn ready-pr)
         (assoc :ready ready-ch))))
 
