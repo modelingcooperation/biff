@@ -56,7 +56,14 @@
                                   (contains? spa-client-paths (:uri req))
                                   (not (some #(str/starts-with? (:uri req) %)
                                              spa-exclude-paths))))
-                       (resource-handler (assoc req :uri spa-path))))]
+                       (some-> req
+                               (assoc :uri spa-path)
+                               resource-handler
+                               ;; We don't cache the SPA HTML file to make sure
+                               ;; that the client notices changes to the linked
+                               ;; SPA JavaScript file.
+                               (assoc-in [:headers "Cache-Control"]
+                                         "no-cache"))))]
       (cond
         static-resp static-resp
         (and (or (not @handler-resp)
