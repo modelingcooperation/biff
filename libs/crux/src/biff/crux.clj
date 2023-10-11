@@ -6,6 +6,7 @@
   interface over crux.api/start-node. Biff queries are less
   powerful than crux.api/q, but they support subscriptions (efficiently)."
   (:require
+    [clojure.pprint :as pp]
     [biff.util :as bu]
     [biff.util.protocols :as proto]
     [clojure.java.io :as io]
@@ -502,8 +503,12 @@
                           (take 20)
                           doall
                           not-empty)]
-      (with-open [db-before (crux/open-db node @latest-tx)
-                  db-after (crux/open-db node (last txes))]
+      (println "--------------------------------------------------------------------")
+      (println "------------------------ Transactions ------------------------------")
+      (println "--------------------------------------------------------------------")
+      (pp/pprint txes)
+      (with-open [db-before (crux/open-db node {::crux/tx @latest-tx})
+                  db-after (crux/open-db node {::crux/tx (last txes)})]
         (reset! latest-tx (last txes))
         (doseq [[subscription ident->doc] (subscription+updates
                                             {:txes txes
@@ -527,8 +532,11 @@
                        [:biff/error {:msg "Read not authorized."
                                      :event-id event-id
                                      :query query}]))
-            (send-fn client-id [event-id {:query query
-                                          :ident->doc ident->doc}])))))))
+            (do (println "--------------------------------------------------------------------")
+                (println "Sending the following doc to client" client-id)
+                (pp/pprint ident->doc)
+                (send-fn client-id [event-id {:query query
+                                              :ident->doc ident->doc}]))))))))
 
 (defn use-crux-sub-notifier
   "Sends new query results to subscribed clients.
