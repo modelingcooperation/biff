@@ -3,6 +3,8 @@
                         :task (shell "bash" "-c"
                                      "cd slate
                                      bundle exec middleman server")}
+         ;; Currently requires JDK 11
+         ;; https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo/issues/350
          slate         {:doc "Build the slate docs."
                         :task (shell "bash" "-c"
                                      "cd slate
