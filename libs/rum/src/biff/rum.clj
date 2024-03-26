@@ -57,7 +57,7 @@
     :style {:min-height "100%"
             :height "auto"}}
    [:head
-    [:title title]
+    [:meta {:charset "utf-8"}]
     [:meta {:name "description" :content description}]
     [:meta {:content title :property "og:title"}]
     [:meta {:content description :property "og:description"}]
@@ -69,12 +69,12 @@
     (when-some [url (or canonical url)]
       [:link {:ref "canonical" :href url}])
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+    [:title title]
     (when icon
       [:link {:rel "icon"
               :type "image/png"
               :sizes "16x16"
               :href icon}])
-    [:meta {:charset "utf-8"}]
     (some-> font-families g-fonts)
     head]
    [:body
