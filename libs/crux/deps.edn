@@ -7,4 +7,4 @@
   biff/util
   {:git/url "https://github.com/modelingcooperation/biff",
    :deps/root "libs/util",
-   :sha "e9fb558a9beba41dcf01a2a7aaf8ad6d10cfbd78"}}}
+   :sha "f3d6757d158781c5a293dfc11217c63f083b7872"}}}
