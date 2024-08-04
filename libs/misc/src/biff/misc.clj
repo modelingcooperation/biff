@@ -200,6 +200,7 @@
   [{:keys [biff.sente/adapter
            biff.sente/event-handler
            biff.sente/route
+           biff.sente/packer
            biff.reitit/routes]
     :or {route "/api/chsk"}
     :as sys}]
@@ -209,11 +210,13 @@
         ;; default Jetty dependency being available.
         adapter (or adapter (get-sch-adapter))
         {:keys [ajax-get-or-ws-handshake-fn
-                ajax-post-fn]
+                ajax-post-fn
+                packer]
          :as result} (sente/make-channel-socket!
                        adapter
                        {:user-id-fn :client-id
-                        :csrf-token-fn sente-csrf-token-fn})
+                        :csrf-token-fn sente-csrf-token-fn
+                        :packer (or packer :edn)})
         sys (merge sys (bu/prepend-keys "biff.sente" result))
         stop-router (sente/start-server-chsk-router!
                       (:ch-recv result)

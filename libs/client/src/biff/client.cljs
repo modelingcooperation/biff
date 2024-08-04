@@ -43,7 +43,7 @@
                                 :query query}])))))
     (handler event)))
 
-(defn- start-socket [{:keys [url csrf-token]}]
+(defn- start-socket [{:keys [url csrf-token packer]}]
   (let [; todo use promise-chan
         ready-ch (chan)
         ready-pr (js/Promise.
@@ -51,7 +51,9 @@
                      (take! ready-ch done)))]
     (-> (sente/make-channel-socket-client! url
                                            csrf-token
-                                           {:type :auto :wrap-recv-evs? true})
+                                           {:type :auto
+                                            :wrap-recv-evs? true
+                                            :packer (or packer :edn)})
         (update :send-fn wrap-send-fn ready-pr)
         (assoc :ready ready-ch))))
 
@@ -136,14 +138,15 @@
   handler:       A function to call with incoming Sente events (except for
                  subscription events).
   verbose:       If true, print debugging info."
-  [{:keys [verbose sub-results subscriptions handler url csrf-token]
+  [{:keys [verbose sub-results subscriptions handler url csrf-token packer]
     :or {handler (constantly nil)}}]
   (let [sub-channels (atom {})
         handler (wrap-sub handler sub-channels)
         {:keys [send-fn] :as env} (init-sente {:handler handler
                                                :subscriptions subscriptions
                                                :url url
-                                               :csrf-token csrf-token})]
+                                               :csrf-token csrf-token
+                                               :packer packer})]
     (maintain-subscriptions
       subscriptions
       (fn [[provider query]]
