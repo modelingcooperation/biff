@@ -530,19 +530,25 @@
                               {:docs (filter some? (vals ident->doc))
                                :query (:query subscription)
                                :db db-after})]
-            (do
-              (st/print-stack-trace
-                (ex-info "Read not authorized."
-                         {:query query
-                          :doc bad-doc}))
-              (flush)
-              (swap! subscriptions disj subscription)
-              (send-fn (:client-id subscription)
-                       [:biff/error {:msg "Read not authorized."
-                                     :event-id event-id
-                                     :query query}]))
-            (send-fn client-id [event-id {:query query
-                                          :ident->doc ident->doc}])))))))
+            (try
+              (do
+                (st/print-stack-trace
+                 (ex-info "Read not authorized."
+                          {:query query
+                           :doc bad-doc}))
+                (flush)
+                (swap! subscriptions disj subscription)
+                (send-fn (:client-id subscription)
+                         [:biff/error {:msg "Read not authorized."
+                                       :event-id event-id
+                                       :query query}]))
+              (catch Exception e
+                (println "!Error sending error message:" e)))
+            (try
+              (send-fn client-id [event-id {:query query
+                                            :ident->doc ident->doc}])
+              (catch Exception e
+                (println "!Error sending error message:" e)))))))))
 
 (defn use-crux-sub-notifier
   "Sends new query results to subscribed clients.
