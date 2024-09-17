@@ -81,6 +81,8 @@
           db
           ident->doc))
 
+(def refetch-queries! (atom nil))
+
 (defn- maintain-subscriptions
   [sub-atom sub-fn]
   (let [sub->unsub-fn (atom {})
@@ -104,7 +106,9 @@
         (swap! sub->unsub-fn #(apply dissoc % old-subs)))
       (recur))
     (add-watch sub-atom ::maintain-subscriptions watch)
-    (watch nil nil #{} @sub-atom)))
+    (watch nil nil #{} @sub-atom)
+    (reset! refetch-queries! (fn []
+                               (watch nil nil #{} @sub-atom)))))
 
 (defn- merge-subscription-results!
   "Continually merge results from subscription into sub-results-atom. Returns a channel
