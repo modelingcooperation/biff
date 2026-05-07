@@ -383,40 +383,26 @@
              (default false).
   biff-tx:   See https://biff.findka.com/#transactions."
   [{:biff.crux/keys [node authorize] :as sys} biff-tx]
-  (let [db-available (some? (:biff.crux/db sys))
-        n-tried (:biff.crux/n-tried sys 0)
-        {:keys [crux-tx] :as tx-info} (when db-available
-                                        (get-tx-info sys biff-tx))
-        _ (when-let [bad-change (and db-available
-                                     authorize
-                                     (check-write sys tx-info))]
+  (let [n-tried (:biff.crux/n-tried sys 0)
+        {:keys [crux-tx] :as tx-info} (get-tx-info sys biff-tx)
+        _ (when-let [bad-change (and authorize (check-write sys tx-info))]
             (bu/throw-anom :forbidden "TX not authorized."
                            bad-change))
-        submitted-tx (when db-available (crux/submit-tx node crux-tx))]
+        submitted-tx (crux/submit-tx node crux-tx)]
     (crux/await-tx node submitted-tx)
     (cond
-      (and db-available
-           (crux/tx-committed? node submitted-tx)) submitted-tx
+      (crux/tx-committed? node submitted-tx) submitted-tx
       (< n-tried 4) (let [seconds (int (Math/pow 2 n-tried))]
-                      (if db-available
-                        (printf "TX failed due to contention, trying again in %d seconds...\n"
-                                seconds)
-                        (printf
-                         (str "TX failed due to the DB not being available, the"
-                              " DB might still be initializing. Trying again in"
-                              " %d seconds...\n")
-                         seconds))
+                      (printf "TX failed due to contention, trying again in %d seconds...\n"
+                              seconds)
                       (flush)
                       (Thread/sleep (* 1000 seconds))
                       ((wrap-db (fn [sys]
                                   (submit-tx sys biff-tx))
                                 {:node node})
                        (update sys :biff.crux/n-tried (fnil inc 0))))
-      :else (if db-available
-                 (bu/throw-anom :conflict "TX failed, too much contention."
-                                {:biff-tx biff-tx})
-                 (bu/throw-anom :conflict "TX failed, DB not available."
-                                {:biff-tx biff-tx})))))
+      :default (bu/throw-anom :conflict "TX failed, too much contention."
+                              {:biff-tx biff-tx}))))
 
 ; === subscribe ===
 
