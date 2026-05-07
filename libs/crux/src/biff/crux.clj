@@ -209,7 +209,7 @@
                         (let [docs (cond
                                      (= op :update) [before after]
                                      (some? after)  [after]
-                                     :default       [before])]
+                                     :else          [before])]
                           (apply authorize
                                  (assoc sys
                                         :doc-type doc-type
@@ -401,8 +401,8 @@
                                   (submit-tx sys biff-tx))
                                 {:node node})
                        (update sys :biff.crux/n-tried (fnil inc 0))))
-      :default (bu/throw-anom :conflict "TX failed, too much contention."
-                              {:biff-tx biff-tx}))))
+      :else (bu/throw-anom :conflict "TX failed, too much contention."
+                           {:biff-tx biff-tx}))))
 
 ; === subscribe ===
 
