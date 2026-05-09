@@ -3,12 +3,12 @@
  #:biff{crux
         {:git/url "https://github.com/modelingcooperation/biff",
          :deps/root "libs/crux",
-         :sha "ddd7fc1b9aa595bc2715813c6684a5d66a356a49"},
+         :sha "0f17f8f27cba1caa3b865810274a1fa142040e5b"},
         util
         {:git/url "https://github.com/modelingcooperation/biff",
          :deps/root "libs/util",
-         :sha "ddd7fc1b9aa595bc2715813c6684a5d66a356a49"},
+         :sha "0f17f8f27cba1caa3b865810274a1fa142040e5b"},
         misc
         {:git/url "https://github.com/modelingcooperation/biff",
          :deps/root "libs/misc",
-         :sha "ddd7fc1b9aa595bc2715813c6684a5d66a356a49"}}}
+         :sha "0f17f8f27cba1caa3b865810274a1fa142040e5b"}}}
